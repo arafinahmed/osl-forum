@@ -6,11 +6,16 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using OSL.Forum.Web.Models;
+using Autofac;
+using Autofac.Integration.Mvc;
+using System.Web.Mvc;
 
 namespace OSL.Forum.Web
 {
     public partial class Startup
     {
+        public ILifetimeScope AutofacContainer { get; set; }
+
         // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
@@ -63,6 +68,21 @@ namespace OSL.Forum.Web
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+
+            var builder = new ContainerBuilder();
+
+            //Registering Dependency
+            builder.RegisterControllers(typeof(MvcApplication).Assembly);
+            builder.RegisterFilterProvider();
+            builder.RegisterSource(new ViewRegistrationSource());
+
+            //Modules
+            builder.RegisterModule(new WebModule());
+
+            var container = builder.Build();
+            AutofacContainer = container;
+
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
     }
 }

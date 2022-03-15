@@ -13,9 +13,22 @@
     @Html.Partial("_NavbarPartial")
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+
+        <footer id="footer">
+            <div class="footer-bottom">
+                <div class="d-flex justify-content-between">
+                    <div class="col-sm-6">
+                        <p class="text-primary">
+                            &copy; @DateTime.Now.Year OnnoRokomSoftware Ltd. |
+                            <a style="text-decoration:none" href="#">Privacy Policy</a> |
+                            <a style="text-decoration:none" href="#">Terms & Contidions</a>
+                        </p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="text-end text-primary">Developed by <a style="text-decoration:none" target="_blank" href="http://www.onnorokomsoftware.com/">OnnoRokom Software Ltd.</a></p>
+                    </div>
+                </div>
+            </div>
         </footer>
     </div>
 
@@ -24,3 +37,16 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <p>© 2022 OnnoRokomSoftware Ltd. | <a href="/PrivacyPolicy">PrivacyPolicy</a> | <a href="/TermsCondition">Terms &amp; Conditions</a></p>
+        </div>
+        <div class="col-sm-6">
+            <p class="pull-right">Developed by <a href="http://www.onnorokomsoftware.com/">OnnoRokom Software Ltd.</a></p>
+        </div>
+    </div>
+</div>

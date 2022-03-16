@@ -22,13 +22,13 @@
                 </li>
                 @if (Request.IsAuthenticated)
                 {
-                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-                    {
-                        <li>
-                            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-                        </li>
-                        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-                    }
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Login", "Account")">@User.Identity.GetUserName()</a>
+                    </li>
+                    <!--<li>-->@*<a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>*@<!--</li>-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("LogOff", "Account")">Sign Out</a>
+                    </li>
                 }
                 else
                 {

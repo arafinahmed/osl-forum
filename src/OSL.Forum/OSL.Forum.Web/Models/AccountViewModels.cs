@@ -65,7 +65,6 @@ namespace OSL.Forum.Web.Models
     public class RegisterViewModel
     {
         [Required]
-        [EmailAddress]
         [Display(Name = "Name")]
         public string Name { get; set; }
 

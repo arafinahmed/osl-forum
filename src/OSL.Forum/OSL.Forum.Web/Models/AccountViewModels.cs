@@ -114,4 +114,9 @@ namespace OSL.Forum.Web.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+
+    public class ConfirmEmailModel
+    {
+        public bool Status { get; set; }
+    }
 }

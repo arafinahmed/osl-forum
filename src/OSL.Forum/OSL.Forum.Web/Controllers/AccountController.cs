@@ -167,7 +167,7 @@ namespace OSL.Forum.Web.Controllers
                     template.AccoutnConfirmationTemplate(user.Name, callbackUrl);
                     await UserManager.SendEmailAsync(user.Id, template.Subject, template.Body);
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("ConfirmRegistration", "Account");
                 }
                 AddErrors(result);
             }
@@ -185,8 +185,33 @@ namespace OSL.Forum.Web.Controllers
             {
                 return View("Error");
             }
-            var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            var model = new ConfirmEmailModel();
+            var user = await UserManager.FindByIdAsync(userId);
+
+            if (user == null)
+                throw new InvalidOperationException("Wrong email confirmation.");
+
+            if (!user.EmailConfirmed)
+            {
+                var result = await UserManager.ConfirmEmailAsync(userId, code);
+                model.Status = false;
+                if (result.Succeeded)
+                    return View(model);
+                else
+                    return View("Error");
+            }
+
+            model.Status = true;
+            return View(model);
+            
+        }
+
+        //
+        // GET: /Account/ConfirmRegistration
+        [AllowAnonymous]
+        public ActionResult ConfirmRegistration()
+        {
+            return View();
         }
 
         //

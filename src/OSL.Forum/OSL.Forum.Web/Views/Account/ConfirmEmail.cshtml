@@ -1,10 +1,25 @@
-﻿@{
+﻿@model OSL.Forum.Web.Models.ConfirmEmailModel
+
+@{
     ViewBag.Title = "Confirm Email";
 }
 
-<h2>@ViewBag.Title.</h2>
-<div>
-    <p>
-        Thank you for confirming your email. Please @Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
-    </p>
+<div class="d-flex justify-content-center">
+    <div class="col-lg-5 col-md-7 col-12 col-sm-9">
+        <div class="card border-primary mt-2" style="max-width: 30rem;">
+            <div class="card-body">
+                <p class="text-center">Welcome to OSL Forum</p>
+                @{
+                    if (Model.Status)
+                    {
+                        <p class="text-center">Your account is already verified. Please Sign In to your account.</p>
+                    }
+                    else
+                    {
+                        <p class="text-center">You have successfully verified your account.</p>
+                    }
+                }
+            </div>
+        </div>
+    </div>
 </div>

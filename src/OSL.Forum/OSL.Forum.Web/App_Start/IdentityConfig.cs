@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
+using System.Net.Mail;
+using System.Net.Mime;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -19,7 +22,32 @@ namespace OSL.Forum.Web
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            //return Task.FromResult(0);
+            return Task.Factory.StartNew(() =>
+            {
+                sendMail(message);
+            });
+        }
+
+        void sendMail(IdentityMessage message)
+        {
+            var myMessage = new MailMessage();
+            myMessage.To.Add(message.Destination);
+            myMessage.From = new MailAddress(
+                                ConfigurationManager.AppSettings["mailAccount"].ToString(), 
+                                ConfigurationManager.AppSettings["mailSender"].ToString());
+            myMessage.Subject = message.Subject;
+
+            myMessage.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(message.Body, null, MediaTypeNames.Text.Plain));
+            myMessage.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(message.Body, null, MediaTypeNames.Text.Html));
+
+            var smtpClient = new SmtpClient("smtp.gmail.com", Convert.ToInt32(587));
+            var credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["mailAccount"].ToString(),
+                ConfigurationManager.AppSettings["mailPassword"].ToString());
+
+            smtpClient.Credentials = credentials;
+            smtpClient.EnableSsl = true;
+            smtpClient.SendMailAsync(myMessage);
         }
     }
 

@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using OSL.Forum.Web.Models;
+using OSL.Forum.Web.Services;
 
 namespace OSL.Forum.Web.Controllers
 {
@@ -19,15 +20,17 @@ namespace OSL.Forum.Web.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private static readonly ILog Log = LogManager.GetLogger(typeof(HomeController));
-
-        public AccountController()
+        private IMailTemplate _mailTemplate;
+        public AccountController(IMailTemplate mailTemplate)
         {
+            _mailTemplate = mailTemplate;
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IMailTemplate mailTemplate)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _mailTemplate = mailTemplate;
         }
 
         public ApplicationSignInManager SignInManager
@@ -163,10 +166,8 @@ namespace OSL.Forum.Web.Controllers
                     // Send an email with this link
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    var template = new EmailTemplateModel();
-                    template.AccountConfirmationTemplate(user.Name, callbackUrl);
-                    await UserManager.SendEmailAsync(user.Id, template.Subject, template.Body);
-
+                    var (Subject, Body) = _mailTemplate.AccountConfirmationTemplate(user.Name, callbackUrl);
+                    await UserManager.SendEmailAsync(user.Id, Subject, Body);
                     return RedirectToAction("ConfirmRegistration", "Account");
                 }
                 AddErrors(result);
@@ -242,9 +243,8 @@ namespace OSL.Forum.Web.Controllers
                 // Send an email with this link
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                var template = new EmailTemplateModel();
-                template.ForgotPasswordTemplate(user.Name, callbackUrl);
-                await UserManager.SendEmailAsync(user.Id, template.Subject, template.Body);
+                var (Subject, Body) = _mailTemplate.ForgotPasswordTemplate(user.Name, callbackUrl);
+                await UserManager.SendEmailAsync(user.Id, Subject, Body);
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 

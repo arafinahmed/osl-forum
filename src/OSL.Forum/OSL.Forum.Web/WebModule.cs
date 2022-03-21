@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using AutoMapper;
 using OSL.Forum.Web.Profiles;
+using OSL.Forum.Web.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace OSL.Forum.Web
             })
                 .As<IMapper>()
                 .InstancePerLifetimeScope();
-
+            builder.RegisterType<MailTemplate>().As<IMailTemplate>().InstancePerLifetimeScope();
             base.Load(builder);
         }
     }

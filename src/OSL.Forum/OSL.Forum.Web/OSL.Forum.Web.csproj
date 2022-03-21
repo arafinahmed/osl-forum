@@ -222,6 +222,8 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Seeds\IdentityHelper.cs" />
+    <Compile Include="Seeds\Roles.cs" />
     <Compile Include="Services\MailTemplate.cs" />
     <Compile Include="Services\IMailTemplate.cs" />
     <Compile Include="Startup.cs" />

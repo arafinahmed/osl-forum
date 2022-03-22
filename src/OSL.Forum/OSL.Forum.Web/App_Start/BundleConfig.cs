@@ -20,11 +20,13 @@ namespace OSL.Forum.Web
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new Bundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/sidebars.js"));
 
             bundles.Add(new Bundle("~/Content/css").Include(
                       "~/Content/css/bootstrap.css",
-                      "~/Content/css/Site.css"));
+                      "~/Content/css/Site.css",
+                      "~/Content/css/sidebars.css"));
         }
     }
 }

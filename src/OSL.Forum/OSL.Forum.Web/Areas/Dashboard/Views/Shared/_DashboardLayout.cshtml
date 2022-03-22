@@ -11,11 +11,18 @@
 @*@Html.Partial("_LoginPartial")*@
 <body style="padding-top: 0px">
     @Html.Partial("_NavbarPartial")
-    <div class="container body-content">
-        @RenderBody()
-        @Html.Partial("_FooterPartial")
+    <div class="d-flex justify-content-start">
+        <div >
+            @Html.Partial("_SideBarPartial")
+        </div>
+        <div class="col-md-2">
+        </div>
+        <div class="container body-content">
+            @RenderBody()
+        </div>
     </div>
-
+    @Html.Partial("_FooterPartial")
+    
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

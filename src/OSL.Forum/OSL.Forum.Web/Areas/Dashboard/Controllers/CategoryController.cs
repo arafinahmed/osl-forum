@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace OSL.Forum.Web.Areas.Dashboard.Controllers
 {
+    [Authorize(Roles ="SuperAdmin")]
     public class CategoryController : Controller
     {
         // GET: Dashboard/Category

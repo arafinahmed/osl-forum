@@ -250,6 +250,8 @@
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\bootstrap.rtl.css" />
     <Content Include="Content\css\bootstrap.rtl.min.css" />
+    <Content Include="Content\css\sidebars.css" />
+    <Content Include="Scripts\sidebars.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\css\Site.css" />
@@ -286,6 +288,7 @@
     <Content Include="Areas\Dashboard\Views\Shared\_NavbarPartial.cshtml" />
     <Content Include="Areas\Dashboard\Views\Shared\_FooterPartial.cshtml" />
     <Content Include="Areas\Dashboard\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Shared\_SideBarPartial.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

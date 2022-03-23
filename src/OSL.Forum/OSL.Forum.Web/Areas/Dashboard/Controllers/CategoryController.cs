@@ -14,5 +14,10 @@ namespace OSL.Forum.Web.Areas.Dashboard.Controllers
         {
             return View();
         }
+
+        public ActionResult CreateCategory()
+        {
+            return View();
+        }
     }
 }

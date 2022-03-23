@@ -82,6 +82,7 @@
     <Compile Include="Contexts\CoreDbContext.cs" />
     <Compile Include="Contexts\ICoreDbContext.cs" />
     <Compile Include="CoreModule.cs" />
+    <Compile Include="BusinessObjects\Category.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Migrations\202203230909516_categorytable.cs" />
     <Compile Include="Migrations\202203230909516_categorytable.Designer.cs">
@@ -95,6 +96,8 @@
     <Compile Include="Services\ICategoryService.cs" />
     <Compile Include="UnitOfWorks\ICoreUnitOfWork.cs" />
     <Compile Include="UnitOfWorks\CoreUnitOfWork.cs" />
+    <Compile Include="Utilities\DateTimeUtility.cs" />
+    <Compile Include="Utilities\IDateTimeUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202203230909516_categorytable.resx">

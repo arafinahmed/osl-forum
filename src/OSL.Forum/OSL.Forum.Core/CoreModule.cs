@@ -3,6 +3,7 @@ using OSL.Forum.Core.Contexts;
 using OSL.Forum.Core.Repositories;
 using OSL.Forum.Core.Services;
 using OSL.Forum.Core.UnitOfWorks;
+using OSL.Forum.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,9 @@ namespace OSL.Forum.Core
 
             //Service Classes
             builder.RegisterType<CategoryService>().As<ICategoryService>().InstancePerLifetimeScope();
+
+            //Utilities
+            builder.RegisterType<DateTimeUtility>().As<IDateTimeUtility>().InstancePerLifetimeScope();
 
             base.Load(builder);
         }

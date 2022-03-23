@@ -56,5 +56,41 @@ namespace OSL.Forum.Core.Services
 
             return categories;
         }
+
+        public BO.Category GetCategory(Guid categoryId)
+        {
+            if (categoryId == Guid.Empty)
+                throw new ArgumentNullException("No category found with the category id.");
+
+            var categoryEntity = _unitOfWork.Categories.GetById(categoryId);
+
+            if (categoryEntity == null)
+                return null;
+
+            var category = _mapper.Map<BO.Category>(categoryEntity);
+
+            return category;
+        }
+
+        public void EditCategory(BO.Category category)
+        {
+            if (category is null)
+                throw new ArgumentNullException(nameof(category));
+
+            var oldEntity = _unitOfWork.Categories.Get(x => x.Name == category.Name, "").FirstOrDefault();
+
+            if (oldEntity != null)
+                throw new DuplicateNameException("Category Name Already Exist.");
+
+            var categoryEntity = _unitOfWork.Categories.GetById(category.Id);
+
+            if (categoryEntity is null)
+                throw new InvalidOperationException("Category is not found.");
+
+            categoryEntity.Name = category.Name;
+            categoryEntity.ModificationDate = category.ModificationDate;
+
+            _unitOfWork.Save();
+        }
     }
 }

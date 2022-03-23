@@ -34,7 +34,13 @@ namespace OSL.Forum.Web.Areas.Dashboard.Controllers
             return View();
         }
 
-        
+        [Authorize(Roles = "SuperAdmin")]
+        public ActionResult EditCategory()
+        {
+            return View();
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "SuperAdmin")]

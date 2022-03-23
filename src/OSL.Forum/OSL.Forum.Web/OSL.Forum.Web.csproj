@@ -209,6 +209,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Dashboard\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
+    <Compile Include="Areas\Dashboard\Models\Category\CreateCategoryModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -289,6 +290,7 @@
     <Content Include="Areas\Dashboard\Views\Shared\_FooterPartial.cshtml" />
     <Content Include="Areas\Dashboard\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Dashboard\Views\Shared\_SideBarPartial.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Category\CreateCategory.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -351,6 +353,12 @@
     <EmbeddedResource Include="Migrations\202203160358233_MaxLengthofName.resx">
       <DependentUpon>202203160358233_MaxLengthofName.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OSL.Forum.Core\OSL.Forum.Core.csproj">
+      <Project>{590776A7-4959-48BC-A525-5730A37BC948}</Project>
+      <Name>OSL.Forum.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

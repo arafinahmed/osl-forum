@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using OSL.Forum.Core.BusinessObjects;
+using OSL.Forum.Web.Areas.Dashboard.Models.Category;
 
 namespace OSL.Forum.Web.Profiles
 {
@@ -10,7 +8,7 @@ namespace OSL.Forum.Web.Profiles
     {
         public WebProfile()
         {
-
+            CreateMap<CreateCategoryModel, Category>().ReverseMap();
         }
     }
 }

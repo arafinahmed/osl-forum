@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSL.Forum.Web", "OSL.Forum.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSL.Forum.DataAccessLayer", "OSL.Forum.DataAccessLayer\OSL.Forum.DataAccessLayer.csproj", "{733EDE82-0B0D-4ACA-A6E1-2C7E923B7DBD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSL.Forum.Core", "OSL.Forum.Core\OSL.Forum.Core.csproj", "{590776A7-4959-48BC-A525-5730A37BC948}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{733EDE82-0B0D-4ACA-A6E1-2C7E923B7DBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{733EDE82-0B0D-4ACA-A6E1-2C7E923B7DBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{733EDE82-0B0D-4ACA-A6E1-2C7E923B7DBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{590776A7-4959-48BC-A525-5730A37BC948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{590776A7-4959-48BC-A525-5730A37BC948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{590776A7-4959-48BC-A525-5730A37BC948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{590776A7-4959-48BC-A525-5730A37BC948}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -293,6 +293,7 @@
     <Content Include="Areas\Dashboard\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Dashboard\Views\Shared\_SideBarPartial.cshtml" />
     <Content Include="Areas\Dashboard\Views\Category\CreateCategory.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Category\EditCategory.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

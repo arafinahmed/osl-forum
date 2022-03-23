@@ -35,9 +35,11 @@ namespace OSL.Forum.Web.Areas.Dashboard.Controllers
         }
 
         [Authorize(Roles = "SuperAdmin")]
-        public ActionResult EditCategory()
+        public ActionResult EditCategory(Guid id)
         {
-            return View();
+            var model = _scope.Resolve<EditCategoryModel>();
+            model.Load(id);
+            return View(model);
         }
 
 
@@ -60,6 +62,32 @@ namespace OSL.Forum.Web.Areas.Dashboard.Controllers
                 {
                     ModelState.AddModelError("", ex.Message);
                     _logger.Error("New Category Creation failed.");
+                    _logger.Error(ex.Message);
+                    return View(model);
+                }
+            }
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
+        public ActionResult EditCategory(EditCategoryModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (!User.IsInRole("SuperAdmin"))
+                        throw new UnauthorizedAccessException("You are not allowed to do this.");
+                    model.Resolve(_scope);
+                    model.Edit();
+                    return RedirectToAction("Index", "Category");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    _logger.Error("Category Edit failed.");
                     _logger.Error(ex.Message);
                     return View(model);
                 }

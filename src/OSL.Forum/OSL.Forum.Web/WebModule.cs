@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using AutoMapper;
+using OSL.Forum.Web.Areas.Dashboard.Models.Category;
 using OSL.Forum.Web.Profiles;
 using OSL.Forum.Web.Services;
 using System;
@@ -29,7 +30,9 @@ namespace OSL.Forum.Web
             })
                 .As<IMapper>()
                 .InstancePerLifetimeScope();
+            
             builder.RegisterType<MailTemplate>().As<IMailTemplate>().InstancePerLifetimeScope();
+            builder.RegisterType<CreateCategoryModel>().AsSelf().InstancePerLifetimeScope();
             base.Load(builder);
         }
     }

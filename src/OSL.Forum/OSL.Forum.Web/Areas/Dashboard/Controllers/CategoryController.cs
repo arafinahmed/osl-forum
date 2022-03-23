@@ -35,10 +35,12 @@ namespace OSL.Forum.Web.Areas.Dashboard.Controllers
         }
 
         [Authorize(Roles = "SuperAdmin")]
-        public ActionResult EditCategory(Guid id)
+        public ActionResult EditCategory(Guid? id)
         {
+            if(id == null)
+                return RedirectToAction("Index", "Category");
             var model = _scope.Resolve<EditCategoryModel>();
-            model.Load(id);
+            model.Load(Guid.Parse(id.ToString()));
             return View(model);
         }
 

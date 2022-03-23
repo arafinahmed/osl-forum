@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BO = OSL.Forum.Core.BusinessObjects;
 
 namespace OSL.Forum.Core.Services
 {
     public interface ICategoryService
     {
+        void CreateCategory(BO.Category category);
     }
 }

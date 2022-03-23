@@ -211,6 +211,7 @@
     <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
     <Compile Include="Areas\Dashboard\Models\Category\CategoriesListModel.cs" />
     <Compile Include="Areas\Dashboard\Models\Category\CreateCategoryModel.cs" />
+    <Compile Include="Areas\Dashboard\Models\Category\EditCategoryModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -292,6 +293,7 @@
     <Content Include="Areas\Dashboard\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Dashboard\Views\Shared\_SideBarPartial.cshtml" />
     <Content Include="Areas\Dashboard\Views\Category\CreateCategory.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Category\EditCategory.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

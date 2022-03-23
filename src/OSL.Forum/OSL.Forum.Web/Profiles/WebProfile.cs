@@ -9,6 +9,7 @@ namespace OSL.Forum.Web.Profiles
         public WebProfile()
         {
             CreateMap<CreateCategoryModel, Category>().ReverseMap();
+            CreateMap<EditCategoryModel, Category>().ReverseMap();
         }
     }
 }

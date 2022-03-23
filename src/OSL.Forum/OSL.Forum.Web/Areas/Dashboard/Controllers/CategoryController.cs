@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace OSL.Forum.Web.Areas.Dashboard.Controllers
 {
-    [Authorize(Roles ="SuperAdmin")]
+    [Authorize(Roles ="SuperAdmin, Admin, Moderator")]
     public class CategoryController : Controller
     {
         private static readonly ILog _logger = LogManager.GetLogger(typeof(CategoryController));
@@ -23,9 +23,12 @@ namespace OSL.Forum.Web.Areas.Dashboard.Controllers
         // GET: Dashboard/Category
         public ActionResult Index()
         {
-            return View();
+            var model = _scope.Resolve<CategoriesListModel>();
+            model.GetCategories();
+            return View(model);
         }
 
+        [Authorize(Roles = "SuperAdmin")]
         public ActionResult CreateCategory()
         {
             return View();

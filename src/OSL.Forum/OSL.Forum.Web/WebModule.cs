@@ -35,6 +35,7 @@ namespace OSL.Forum.Web
             
             builder.RegisterType<MailTemplate>().As<IMailTemplate>().InstancePerLifetimeScope();
             builder.RegisterType<CreateCategoryModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<CategoriesListModel>().AsSelf().InstancePerLifetimeScope();
             base.Load(builder);
         }
     }

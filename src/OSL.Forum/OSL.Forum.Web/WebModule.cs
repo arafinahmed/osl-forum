@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using AutoMapper;
+using OSL.Forum.Core.Profiles;
 using OSL.Forum.Web.Areas.Dashboard.Models.Category;
 using OSL.Forum.Web.Profiles;
 using OSL.Forum.Web.Services;
@@ -18,6 +19,7 @@ namespace OSL.Forum.Web
             {
                 //Register Mapper Profile
                 cfg.AddProfile<WebProfile>();
+                cfg.AddProfile<CoreProfiles>();
             }
             )).AsSelf().InstancePerRequest();
 

@@ -354,6 +354,12 @@
       <DependentUpon>202203160358233_MaxLengthofName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OSL.Forum.Core\OSL.Forum.Core.csproj">
+      <Project>{590776A7-4959-48BC-A525-5730A37BC948}</Project>
+      <Name>OSL.Forum.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

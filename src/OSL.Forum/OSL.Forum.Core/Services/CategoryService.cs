@@ -34,7 +34,7 @@ namespace OSL.Forum.Core.Services
                 throw new DuplicateNameException("Category Name Already Exist.");
             
             var newcategoryEntity = _mapper.Map<EO.Category>(category);
-            _unitOfWork.Categories.Add(categoryEntity);
+            _unitOfWork.Categories.Add(newcategoryEntity);
             _unitOfWork.Save();
         }
     }

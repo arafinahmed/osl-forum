@@ -9,12 +9,14 @@ using OSL.Forum.Web.Models;
 using Autofac;
 using Autofac.Integration.Mvc;
 using System.Web.Mvc;
+using OSL.Forum.Core;
 
 namespace OSL.Forum.Web
 {
     public partial class Startup
     {
         public ILifetimeScope AutofacContainer { get; set; }
+        public static string connectionString = "DefaultConnection";
 
         // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
@@ -78,6 +80,7 @@ namespace OSL.Forum.Web
 
             //Modules
             builder.RegisterModule(new WebModule());
+            builder.RegisterModule(new CoreModule(connectionString));
 
             var container = builder.Build();
             AutofacContainer = container;

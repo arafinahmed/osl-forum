@@ -37,5 +37,24 @@ namespace OSL.Forum.Core.Services
             _unitOfWork.Categories.Add(newcategoryEntity);
             _unitOfWork.Save();
         }
+
+        public IList<BO.Category> GetCategories()
+        {
+            var categoryEntities = _unitOfWork.Categories.Get(null, "");
+
+            var categoryList = from c in categoryEntities
+                               orderby c.ModificationDate descending
+                               select c;
+
+            var categories = new List<BO.Category>();
+
+            foreach (var entity in categoryList)
+            {
+                var category = _mapper.Map<BO.Category>(entity);
+                categories.Add(category);
+            }
+
+            return categories;
+        }
     }
 }

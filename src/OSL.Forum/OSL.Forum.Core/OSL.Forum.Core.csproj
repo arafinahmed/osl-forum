@@ -82,6 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessObjects\Forum.cs" />
     <Compile Include="Contexts\CoreDbContext.cs" />
     <Compile Include="Contexts\ICoreDbContext.cs" />
     <Compile Include="CoreModule.cs" />

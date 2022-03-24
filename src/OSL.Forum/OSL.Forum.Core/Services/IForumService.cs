@@ -6,5 +6,6 @@ namespace OSL.Forum.Core.Services
 {
     public interface IForumService
     {
+        void CreateForum(BO.Forum forum);
     }
 }

@@ -1,10 +1,10 @@
 ﻿using Autofac;
 using log4net;
-using OSL.Forum.Web.Areas.Dashboard.Models.Category;
 using OSL.Forum.Web.Areas.Dashboard.Models.Forum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -22,11 +22,43 @@ namespace OSL.Forum.Web.Areas.Dashboard.Controllers
         }
 
         [Authorize(Roles = "SuperAdmin, Admin")]
-        public ActionResult CreateForum(Guid id)
+        public ActionResult CreateForum(Guid? id)
         {
+            if (id == null)
+                return RedirectToAction("Index", "Category");
             var model = _scope.Resolve<CreateForumModel>();
-            model.Load(id);
+            model.Load(Guid.Parse(id.ToString()));
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin, Admin")]
+        public async Task<ActionResult> CreateForum(CreateForumModel model)
+        {
+            if(model.CategoryId == null)
+                return RedirectToAction("Index", "Category");
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (!User.IsInRole("SuperAdmin") && !User.IsInRole("Admin"))
+                        throw new UnauthorizedAccessException("You are not allowed to do this.");
+                    model.Resolve(_scope);
+                    await model.Create();
+                    return RedirectToAction("Details", "Category", new { id = model.CategoryId });
+                }
+                catch (Exception ex)
+                {
+                    model.Load(model.CategoryId);
+                    ModelState.AddModelError("", ex.Message);
+                    _logger.Error("New Category Creation failed.");
+                    _logger.Error(ex.Message);
+                    return View(model);
+                }
+            }
+            return View();
         }
     }
 }

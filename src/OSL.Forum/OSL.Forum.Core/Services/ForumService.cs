@@ -28,7 +28,7 @@ namespace OSL.Forum.Core.Services
             if (forum is null)
                 throw new ArgumentNullException(nameof(forum));
 
-            var oldForum = _unitOfWork.Forums.Get(f => f.Name==forum.Name && f.CategoryId==forum.CategoryId, "").FirstOrDefault();
+            var oldForum = _unitOfWork.Forums.Get(f => f.Name == forum.Name && f.CategoryId == forum.CategoryId, "").FirstOrDefault();
 
             if (oldForum != null)
                 throw new DuplicateNameException("This Forum name already exists under this category.");

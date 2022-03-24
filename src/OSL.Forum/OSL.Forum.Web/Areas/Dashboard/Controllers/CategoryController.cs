@@ -106,5 +106,11 @@ namespace OSL.Forum.Web.Areas.Dashboard.Controllers
             model.Delete(id);
             return RedirectToAction(nameof(Index));
         }
+
+        [Authorize(Roles = "SuperAdmin, Admin, Moderator")]
+        public ActionResult Details(Guid id)
+        {
+            return View();
+        }
     }
 }

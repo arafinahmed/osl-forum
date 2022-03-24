@@ -207,6 +207,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\ForumController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
     <Compile Include="Areas\Dashboard\Models\Category\CategoriesListModel.cs" />
@@ -214,6 +215,7 @@
     <Compile Include="Areas\Dashboard\Models\Category\DeleteCategoryModel.cs" />
     <Compile Include="Areas\Dashboard\Models\Category\CategoryDetailsModel.cs" />
     <Compile Include="Areas\Dashboard\Models\Category\EditCategoryModel.cs" />
+    <Compile Include="Areas\Dashboard\Models\Forum\CreateForumModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -232,8 +234,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Seeds\IdentityHelper.cs" />
     <Compile Include="Seeds\Roles.cs" />
+    <Compile Include="Services\IProfileService.cs" />
     <Compile Include="Services\MailTemplate.cs" />
     <Compile Include="Services\IMailTemplate.cs" />
+    <Compile Include="Services\ProfileService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="WebModule.cs" />
     <Compile Include="Profiles\WebProfile.cs" />
@@ -297,6 +301,7 @@
     <Content Include="Areas\Dashboard\Views\Category\CreateCategory.cshtml" />
     <Content Include="Areas\Dashboard\Views\Category\EditCategory.cshtml" />
     <Content Include="Areas\Dashboard\Views\Category\Details.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Forum\CreateForum.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

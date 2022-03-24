@@ -9,6 +9,7 @@ namespace OSL.Forum.Core.Profiles
         public CoreProfiles()
         {
             CreateMap<EO.Category, BO.Category>().ReverseMap();
+            CreateMap<EO.Forum, BO.Forum>().ReverseMap();
         }
     }
 }

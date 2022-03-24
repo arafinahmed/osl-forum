@@ -2,6 +2,7 @@
 using AutoMapper;
 using OSL.Forum.Core.Profiles;
 using OSL.Forum.Web.Areas.Dashboard.Models.Category;
+using OSL.Forum.Web.Areas.Dashboard.Models.Forum;
 using OSL.Forum.Web.Profiles;
 using OSL.Forum.Web.Services;
 using System;
@@ -32,13 +33,15 @@ namespace OSL.Forum.Web
             })
                 .As<IMapper>()
                 .InstancePerLifetimeScope();
-            
+
+            builder.RegisterType<ProfileService>().As<IProfileService>().InstancePerLifetimeScope();
             builder.RegisterType<MailTemplate>().As<IMailTemplate>().InstancePerLifetimeScope();
             builder.RegisterType<CreateCategoryModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<CategoriesListModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<EditCategoryModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<DeleteCategoryModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<CategoryDetailsModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<CreateForumModel>().AsSelf().InstancePerLifetimeScope();
             base.Load(builder);
         }
     }

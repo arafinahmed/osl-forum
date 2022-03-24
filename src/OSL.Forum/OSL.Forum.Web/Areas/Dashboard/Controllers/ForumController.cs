@@ -12,12 +12,18 @@ namespace OSL.Forum.Web.Areas.Dashboard.Controllers
     [Authorize(Roles ="SuperAdmin, Admin, Moderator")]
     public class ForumController : Controller
     {
-        private static readonly ILog _logger = LogManager.GetLogger(typeof(CategoryController));
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(ForumController));
         private readonly ILifetimeScope _scope;
 
         public ForumController(ILifetimeScope scope)
         {
             _scope = scope;
+        }
+
+        [Authorize(Roles = "SuperAdmin, Admin")]
+        public ActionResult CreateForum()
+        {
+            return View();
         }
     }
 }

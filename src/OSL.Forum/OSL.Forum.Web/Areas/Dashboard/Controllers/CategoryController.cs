@@ -106,5 +106,24 @@ namespace OSL.Forum.Web.Areas.Dashboard.Controllers
             model.Delete(id);
             return RedirectToAction(nameof(Index));
         }
+
+        [Authorize(Roles = "SuperAdmin, Admin, Moderator")]
+        public ActionResult Details(Guid? id)
+        {
+            if(id == null)
+                return RedirectToAction("Index", "Category");
+            try
+            {
+                var model = _scope.Resolve<CategoryDetailsModel>();
+                model.Load(Guid.Parse(id.ToString()));
+                return View(model);
+            }
+            catch(Exception ex)
+            {
+                _logger.Error("Invalid attempt in url.");
+                _logger.Error(ex.Message);
+                return RedirectToAction("Index", "Category");
+            }
+        }
     }
 }

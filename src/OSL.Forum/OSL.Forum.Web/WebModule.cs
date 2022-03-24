@@ -38,6 +38,7 @@ namespace OSL.Forum.Web
             builder.RegisterType<CategoriesListModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<EditCategoryModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<DeleteCategoryModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<CategoryDetailsModel>().AsSelf().InstancePerLifetimeScope();
             base.Load(builder);
         }
     }

@@ -211,6 +211,7 @@
     <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
     <Compile Include="Areas\Dashboard\Models\Category\CategoriesListModel.cs" />
     <Compile Include="Areas\Dashboard\Models\Category\CreateCategoryModel.cs" />
+    <Compile Include="Areas\Dashboard\Models\Category\DeleteCategoryModel.cs" />
     <Compile Include="Areas\Dashboard\Models\Category\EditCategoryModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

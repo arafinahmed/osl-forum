@@ -1,4 +1,4 @@
-﻿using OSL.Forum.Core.Entities;
+﻿using EO = OSL.Forum.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -21,9 +21,20 @@ namespace OSL.Forum.Core.Contexts
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<EO.Category>()
+                .HasKey(c => c.Id)
+                .HasMany(c => c.Forums);
+
+            modelBuilder.Entity<EO.Forum>()
+                .HasKey(f => f.Id)
+                .HasRequired(f => f.Category)
+                .WithMany(c => c.Forums)
+                .HasForeignKey(f => f.CategoryId);
+
             base.OnModelCreating(modelBuilder);
         }
 
-        DbSet<Category> Categories { get; set; }
+        DbSet<EO.Category> Categories { get; set; }
+        DbSet<EO.Forum> Forums{ get; set; }
     }
 }

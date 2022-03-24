@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace OSL.Forum.Core.Entities
 {
-    [Table("Categories")]
-    public class Category : IEntity<Guid>
+    [Table("Forums")]
+    public class Forum : IEntity<Guid>
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
@@ -19,6 +19,8 @@ namespace OSL.Forum.Core.Entities
         public string Name { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime ModificationDate { get; set; }
-        public virtual IList<Forum> Forums { get; set; }
+        public Guid CategoryId { get; set; }
+        public string ApplicationUserId { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

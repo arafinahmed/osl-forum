@@ -87,9 +87,14 @@
     <Compile Include="CoreModule.cs" />
     <Compile Include="BusinessObjects\Category.cs" />
     <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\Forum.cs" />
     <Compile Include="Migrations\202203230909516_categorytable.cs" />
     <Compile Include="Migrations\202203230909516_categorytable.Designer.cs">
       <DependentUpon>202203230909516_categorytable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203241115539_ForumTable.cs" />
+    <Compile Include="Migrations\202203241115539_ForumTable.Designer.cs">
+      <DependentUpon>202203241115539_ForumTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Profiles\CoreProfiles.cs" />
@@ -106,6 +111,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202203230909516_categorytable.resx">
       <DependentUpon>202203230909516_categorytable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203241115539_ForumTable.resx">
+      <DependentUpon>202203241115539_ForumTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

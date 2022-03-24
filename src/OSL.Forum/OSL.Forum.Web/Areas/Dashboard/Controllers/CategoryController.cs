@@ -100,6 +100,10 @@ namespace OSL.Forum.Web.Areas.Dashboard.Controllers
         [HttpPost, ValidateAntiForgeryToken, Authorize(Roles = "SuperAdmin")]
         public ActionResult Delete(Guid id)
         {
+            if (!User.IsInRole("SuperAdmin"))
+                return RedirectToAction(nameof(Index));
+            var model = _scope.Resolve<DeleteCategoryModel>();
+            model.Delete(id);
             return RedirectToAction(nameof(Index));
         }
     }

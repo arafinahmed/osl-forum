@@ -301,6 +301,7 @@
     <Content Include="Areas\Dashboard\Views\Category\CreateCategory.cshtml" />
     <Content Include="Areas\Dashboard\Views\Category\EditCategory.cshtml" />
     <Content Include="Areas\Dashboard\Views\Category\Details.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Forum\CreateForum.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

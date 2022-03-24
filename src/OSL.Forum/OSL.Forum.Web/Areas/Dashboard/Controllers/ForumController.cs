@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using log4net;
 using OSL.Forum.Web.Areas.Dashboard.Models.Category;
+using OSL.Forum.Web.Areas.Dashboard.Models.Forum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +22,11 @@ namespace OSL.Forum.Web.Areas.Dashboard.Controllers
         }
 
         [Authorize(Roles = "SuperAdmin, Admin")]
-        public ActionResult CreateForum()
+        public ActionResult CreateForum(Guid id)
         {
-            return View();
+            var model = _scope.Resolve<CreateForumModel>();
+            model.Load(id);
+            return View(model);
         }
     }
 }

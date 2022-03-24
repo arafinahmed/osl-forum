@@ -96,5 +96,11 @@ namespace OSL.Forum.Web.Areas.Dashboard.Controllers
             }
             return View();
         }
+
+        [HttpPost, ValidateAntiForgeryToken, Authorize(Roles = "SuperAdmin")]
+        public ActionResult Delete(Guid id)
+        {
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

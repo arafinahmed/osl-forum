@@ -100,5 +100,16 @@ namespace OSL.Forum.Web.Areas.Dashboard.Controllers
             }
             return View();
         }
+
+        [HttpPost, ValidateAntiForgeryToken, Authorize(Roles = "SuperAdmin, Admin")]
+        public ActionResult Delete(Guid id)
+        {
+            var model = _scope.Resolve<DeleteForumModel>();
+            var categoryId = model.GetCategoryId(id);
+            if (!User.IsInRole("SuperAdmin") && !User.IsInRole("Admin"))
+                return RedirectToAction("Details", "Category", new {id =  categoryId});
+            model.Delete(id);
+            return RedirectToAction("Details", "Category", new { id = categoryId });
+        }
     }
 }

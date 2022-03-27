@@ -67,6 +67,7 @@ namespace OSL.Forum.Core.Services
             if (categoryEntity == null)
                 return null;
 
+            categoryEntity.Forums = categoryEntity.Forums.OrderByDescending(c => c.ModificationDate).ToList();
             var category = _mapper.Map<BO.Category>(categoryEntity);
 
             return category;

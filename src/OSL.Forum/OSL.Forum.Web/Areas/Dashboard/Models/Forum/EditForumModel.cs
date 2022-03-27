@@ -73,24 +73,23 @@ namespace OSL.Forum.Web.Areas.Dashboard.Models.Forum
             var user = _profileService.GetUser();
 
             if (user == null)
-                throw new InvalidOperationException("No user found for create a forum");
+                throw new InvalidOperationException("No user found for edit a forum");
 
             var roles = await _profileService.UserRoles();
             
             if(!roles.Contains("SuperAdmin") && !roles.Contains("Admin"))
                 throw new InvalidOperationException("You are not allowed to create a forum");
 
-            var time = _dateTimeUtility.Now;
             var forum = new BO.Forum()
             {
+                Id = Id,
                 Name = Name,
                 CategoryId = CategoryId,
                 ApplicationUserId = user.Id,
-                CreationDate = time,
-                ModificationDate = time,
-            };
+                ModificationDate = _dateTimeUtility.Now
+        };
 
-            _forumService.CreateForum(forum);
+            _forumService.EditForum(forum);
         }
     }
 }

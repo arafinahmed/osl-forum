@@ -63,7 +63,37 @@ namespace OSL.Forum.Web.Areas.Dashboard.Controllers
                 {
                     model.Load(model.CategoryId);
                     ModelState.AddModelError("", ex.Message);
-                    _logger.Error("New Category Creation failed.");
+                    _logger.Error("New Forum Creation failed.");
+                    _logger.Error(ex.Message);
+                    return View(model);
+                }
+            }
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin, Admin")]
+        public async Task<ActionResult> EditForum(EditForumModel model)
+        {
+            if (model.CategoryId == null)
+                return RedirectToAction("Index", "Category");
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (!User.IsInRole("SuperAdmin") && !User.IsInRole("Admin"))
+                        throw new UnauthorizedAccessException("You are not allowed to do this.");
+                    model.Resolve(_scope);
+                    await model.Edit();
+                    return RedirectToAction("Details", "Category", new { id = model.CategoryId });
+                }
+                catch (Exception ex)
+                {
+                    model.Load(model.Id);
+                    ModelState.AddModelError("", ex.Message);
+                    _logger.Error("Edit forum name failed.");
                     _logger.Error(ex.Message);
                     return View(model);
                 }

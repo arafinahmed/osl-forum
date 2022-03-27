@@ -16,7 +16,7 @@
         <h4>Edit Forum Name</h4>
         <div class="card border-primary mt-2" style="max-width: 35rem; min-width:25rem;">
             <div class="card-body">
-                @using (Html.BeginForm("CreateForum", "Forum", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                @using (Html.BeginForm("EditForum", "Forum", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
                     <br />
                     @Html.AntiForgeryToken()

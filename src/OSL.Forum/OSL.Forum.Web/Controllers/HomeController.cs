@@ -11,7 +11,7 @@ namespace OSL.Forum.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private static readonly ILog Log = LogManager.GetLogger(typeof(HomeController));
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(HomeController));
         private readonly ILifetimeScope _scope;
 
         public HomeController(ILifetimeScope scope)
@@ -37,6 +37,24 @@ namespace OSL.Forum.Web.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult Category(Guid? id)
+        {
+            if (id == null)
+                return RedirectToAction("Index", "Home");
+            try
+            {
+                var model = _scope.Resolve<CategoryModel>();
+                model.Load(Guid.Parse(id.ToString()));
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Invalid attempt in url.");
+                _logger.Error(ex.Message);
+                return RedirectToAction("Index", "Home");
+            }
         }
     }
 }

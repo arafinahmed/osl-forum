@@ -50,7 +50,14 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <ul>
+                            @{ 
+                                foreach(var forum in category.Forums)
+                                {
+                                    <li class="text-primary"><h6>@forum.Name</h6></li>
+                                }
+                            }
+                        </ul>
                     </div>
                 </div>
             </div>

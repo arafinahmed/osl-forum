@@ -31,6 +31,16 @@ namespace OSL.Forum.Web.Areas.Dashboard.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "SuperAdmin, Admin")]
+        public ActionResult EditForum(Guid? id)
+        {
+            if (id == null)
+                return RedirectToAction("Index", "Category");
+            var model = _scope.Resolve<EditForumModel>();
+            model.Load(Guid.Parse(id.ToString()));
+            return View(model);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "SuperAdmin, Admin")]

@@ -64,5 +64,18 @@ namespace OSL.Forum.Core.Services
 
             _unitOfWork.Save();
         }
+
+        public BO.Forum GetCategory(Guid forumId)
+        {
+            if (forumId == Guid.Empty)
+                throw new ArgumentNullException("Forum id is empty.");
+
+            var forumEntity = _unitOfWork.Forums.GetById(forumId);
+
+            if (forumEntity == null)
+                return null;
+
+            return _mapper.Map<BO.Forum>(forumEntity);
+        }
     }
 }

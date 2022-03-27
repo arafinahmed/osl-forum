@@ -43,6 +43,7 @@ namespace OSL.Forum.Web
             builder.RegisterType<CategoryDetailsModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<CreateForumModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<EditForumModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<DeleteForumModel>().AsSelf().InstancePerLifetimeScope();
 
             base.Load(builder);
         }

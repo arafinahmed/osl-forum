@@ -99,6 +99,10 @@
     <Compile Include="Migrations\202203241115539_ForumTable.Designer.cs">
       <DependentUpon>202203241115539_ForumTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202203271209438_postandtopics.cs" />
+    <Compile Include="Migrations\202203271209438_postandtopics.Designer.cs">
+      <DependentUpon>202203271209438_postandtopics.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Profiles\CoreProfiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -121,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202203241115539_ForumTable.resx">
       <DependentUpon>202203241115539_ForumTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203271209438_postandtopics.resx">
+      <DependentUpon>202203271209438_postandtopics.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

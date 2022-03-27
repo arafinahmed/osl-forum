@@ -10,10 +10,10 @@
 </head>
 <body style="padding-top: 0px">
     @Html.Partial("_NavbarPartial")
-    <div class="container body-content">
+    <div class="container body-content pb-5">
         @RenderBody()
-        @Html.Partial("_FooterPartial")
     </div>
+    @Html.Partial("_FooterPartial")
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

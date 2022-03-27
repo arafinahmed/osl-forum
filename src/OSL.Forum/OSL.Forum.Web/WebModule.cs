@@ -3,6 +3,7 @@ using AutoMapper;
 using OSL.Forum.Core.Profiles;
 using OSL.Forum.Web.Areas.Dashboard.Models.Category;
 using OSL.Forum.Web.Areas.Dashboard.Models.Forum;
+using OSL.Forum.Web.Models.Category;
 using OSL.Forum.Web.Profiles;
 using OSL.Forum.Web.Services;
 using System;
@@ -44,6 +45,7 @@ namespace OSL.Forum.Web
             builder.RegisterType<CreateForumModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<EditForumModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<DeleteForumModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<AllCategoryModel>().AsSelf().InstancePerLifetimeScope();
 
             base.Load(builder);
         }

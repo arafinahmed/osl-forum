@@ -25,9 +25,22 @@ namespace OSL.Forum.Web.Areas.Dashboard.Models.Forum
             _forumService = _scope.Resolve<IForumService>();
         }
 
-        public void Delete(Guid categoryId)
+        public void Delete(Guid forumId)
         {
-            _forumService.Delete(categoryId);
+            _forumService.Delete(forumId);
+        }
+
+        public Guid GetCategoryId(Guid forumId)
+        {
+            if (forumId == null)
+                throw new ArgumentNullException("No forum id is provided");
+
+            var forum = _forumService.GetForum(forumId);
+
+            if (forum == null)
+                throw new NullReferenceException("No forum found.");
+
+            return forum.CategoryId;
         }
     }
 }

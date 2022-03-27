@@ -65,7 +65,7 @@ namespace OSL.Forum.Core.Services
             _unitOfWork.Save();
         }
 
-        public BO.Forum GetCategory(Guid forumId)
+        public BO.Forum GetForum(Guid forumId)
         {
             if (forumId == Guid.Empty)
                 throw new ArgumentNullException("Forum id is empty.");

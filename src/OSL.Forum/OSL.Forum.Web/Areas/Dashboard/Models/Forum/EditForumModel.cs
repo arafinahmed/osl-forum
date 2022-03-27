@@ -58,7 +58,7 @@ namespace OSL.Forum.Web.Areas.Dashboard.Models.Forum
             if (forumId == Guid.Empty)
                 throw new ArgumentNullException(nameof(forumId));
 
-            var forum = _forumService.GetCategory(forumId);
+            var forum = _forumService.GetForum(forumId);
             _mapper.Map(forum, this);
 
             var category = _categoryService.GetCategory(forum.CategoryId);

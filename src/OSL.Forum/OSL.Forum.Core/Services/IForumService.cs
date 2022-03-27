@@ -8,7 +8,7 @@ namespace OSL.Forum.Core.Services
     {
         void CreateForum(BO.Forum forum);
         void EditForum(BO.Forum forum);
-        BO.Forum GetCategory(Guid forumId);
+        BO.Forum GetForum(Guid forumId);
         void Delete(Guid forumId);
     }
 }

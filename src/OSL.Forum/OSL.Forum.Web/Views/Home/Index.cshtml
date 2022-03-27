@@ -5,7 +5,7 @@
 
 <div class="container d-flex justify-content-center mt-2">
 
-    <div class="col-md-7" style="display:grid; grid-template-columns: repeat(2, 1fr);">
+    <div class="col-md-7" style="display:grid; grid-template-columns: repeat(2, 1fr); grid-gap:1rem;">
         @foreach (var category in Model.Categories)
         {
             <div id="categories">
@@ -23,7 +23,7 @@
                                 {
                                     <li class="text-primary">
                                         <h6>
-                                            <a style="text-decoration:none;" href="@Url.Action("Details", "Category", new {Area = "Dashboard", id = category.Id })">@forum.Name</a>
+                                            <a style="text-decoration:none;" href="@Url.Action("Forum", "Home", new {Area = "", id = forum.Id })">@forum.Name</a>
                                         </h6>
                                     </li>
                                     i++;

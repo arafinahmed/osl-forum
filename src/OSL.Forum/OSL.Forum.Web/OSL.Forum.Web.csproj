@@ -358,6 +358,7 @@
     <Content Include="Areas\Dashboard\Views\Shared\_DashboardLayout.cshtml" />
     <Content Include="Views\Home\Category.cshtml" />
     <Content Include="Views\Home\Forum.cshtml" />
+    <Content Include="Views\Home\NewTopic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

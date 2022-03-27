@@ -75,5 +75,10 @@ namespace OSL.Forum.Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+        [Authorize]
+        public ActionResult NewTopic(Guid? id)
+        {
+            return View();
+        }
     }
 }

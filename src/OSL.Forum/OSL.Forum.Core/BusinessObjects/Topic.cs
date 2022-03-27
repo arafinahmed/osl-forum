@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace OSL.Forum.Core.Entities
+namespace OSL.Forum.Core.BusinessObjects
 {
     public class Topic
     {

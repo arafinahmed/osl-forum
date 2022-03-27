@@ -14,6 +14,7 @@ namespace OSL.Forum.Web.Areas.Dashboard.Models.Category
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public IList<BO.Forum> Forums { get; set; }
         private ILifetimeScope _scope;
         private ICategoryService _categoryService;
         private IMapper _mapper;

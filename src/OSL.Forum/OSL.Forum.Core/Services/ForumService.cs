@@ -77,5 +77,14 @@ namespace OSL.Forum.Core.Services
 
             return _mapper.Map<BO.Forum>(forumEntity);
         }
+
+        public void Delete(Guid forumId)
+        {
+            if (forumId == Guid.Empty)
+                throw new ArgumentNullException(nameof(forumId));
+
+            _unitOfWork.Forums.Remove(forumId);
+            _unitOfWork.Save();
+        }
     }
 }

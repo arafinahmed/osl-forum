@@ -6,8 +6,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OSL.Forum.Core.Entities
 {
-    [Table("Forums")]
-    public class Forum : IEntity<Guid>
+    [Table("Topics")]
+    public class Topic : IEntity<Guid>
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
@@ -16,9 +16,10 @@ namespace OSL.Forum.Core.Entities
         public string Name { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime ModificationDate { get; set; }
-        public Guid CategoryId { get; set; }
+        public Guid ForumId { get; set; }
+        public virtual Forum Forum { get; set; }
         public string ApplicationUserId { get; set; }
-        public virtual Category Category { get; set; }
-        public virtual IList<Topic> Topics { get; set; }
+        public string ApprovalType { get; set; }
+        public virtual IList<Post> Posts { get; set; }
     }
 }

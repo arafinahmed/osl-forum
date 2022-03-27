@@ -38,5 +38,31 @@ namespace OSL.Forum.Core.Services
             _unitOfWork.Forums.Add(forumEntity);
             _unitOfWork.Save();
         }
+
+        public void EditForum(BO.Forum forum)
+        {
+            if (forum is null)
+                throw new ArgumentNullException(nameof(forum));
+
+            var categoryEntity = _unitOfWork.Categories.GetById(forum.CategoryId);
+
+            if (categoryEntity == null)
+                throw new InvalidOperationException("Forum can not be created without valid category id.");
+
+            var oldForum = _unitOfWork.Forums.Get(f => f.Name == forum.Name && f.CategoryId == forum.CategoryId, "").FirstOrDefault();
+
+            if (oldForum != null)
+                throw new DuplicateNameException("This Forum name already exists under this category.");
+
+            var forumEntity = _unitOfWork.Forums.GetById(forum.Id);
+
+            if (forumEntity is null)
+                throw new InvalidOperationException("Forum is not found.");
+
+            forumEntity.Name = forum.Name;
+            forumEntity.ModificationDate = forum.ModificationDate;
+
+            _unitOfWork.Save();
+        }
     }
 }

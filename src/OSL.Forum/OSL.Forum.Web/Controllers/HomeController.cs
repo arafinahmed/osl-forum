@@ -1,4 +1,6 @@
-﻿using log4net;
+﻿using Autofac;
+using log4net;
+using OSL.Forum.Web.Models.Category;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +12,17 @@ namespace OSL.Forum.Web.Controllers
     public class HomeController : Controller
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(HomeController));
+        private readonly ILifetimeScope _scope;
+
+        public HomeController(ILifetimeScope scope)
+        {
+            _scope = scope;
+        }
         public ActionResult Index()
         {
-            Log.Info("Action Index has been fired for test purpose.");
-            return View();
+            var model = _scope.Resolve<AllCategoryModel>();
+            model.GetCategories();
+            return View(model);
         }
 
         public ActionResult About()

@@ -1,0 +1,46 @@
+﻿@model OSL.Forum.Web.Areas.Dashboard.Models.Forum.EditForumModel
+
+@{
+    ViewBag.Title = "Edit Forum";
+}
+
+
+<div class="d-flex justify-content-between mt-2">
+    <h4 class="text-primary"><a class="btn btn-primary" href="@Url.Action("Index", "Category", new {Area = "Dashboard"})">Category</a></h4>
+    <h4 class="text-primary"><a class="btn btn-primary" href="@Url.Action("Details", "Category", new {Area = "Dashboard", id =  Model.CategoryId})">@Model.CategoryName</a></h4>
+</div>
+
+<div class="d-flex justify-content-around">
+    <div class="col-lg-5 col-md-7 col-12 col-sm-9">
+        <br />
+        <h4>Edit Forum Name</h4>
+        <div class="card border-primary mt-2" style="max-width: 35rem; min-width:25rem;">
+            <div class="card-body">
+                @using (Html.BeginForm("EditForum", "Forum", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    <br />
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.CategoryId)
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Name, new { @class = "control-label text-primary" })
+                        <div class="">
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control text-primary", @placeholder = "Enter Forum Name" })
+                            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group text-end">
+                        <div class="col-md-offset-2">
+                            <input type="submit" value="Submit" class="btn btn-primary" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

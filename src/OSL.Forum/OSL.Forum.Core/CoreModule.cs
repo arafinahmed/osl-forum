@@ -43,6 +43,8 @@ namespace OSL.Forum.Core
             //Service Classes
             builder.RegisterType<CategoryService>().As<ICategoryService>().InstancePerLifetimeScope();
             builder.RegisterType<ForumService>().As<IForumService>().InstancePerLifetimeScope();
+            builder.RegisterType<PostService>().As<IPostService>().InstancePerLifetimeScope();
+            builder.RegisterType<TopicService>().As<ITopicService>().InstancePerLifetimeScope();
 
             //Utilities
             builder.RegisterType<DateTimeUtility>().As<IDateTimeUtility>().InstancePerLifetimeScope();

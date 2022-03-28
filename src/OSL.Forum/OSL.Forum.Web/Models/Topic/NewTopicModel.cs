@@ -22,7 +22,6 @@ namespace OSL.Forum.Web.Models.Topic
         [Display(Name = "Description")]
         [StringLength(10000, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 50)]
         public string Description { get; set; }
-        public Guid Id { get; set; }
         public string ForumName { get; set; }
         public string CategoryName { get; set; }
         public Guid CategoryId { get; set; }

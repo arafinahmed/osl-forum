@@ -94,5 +94,23 @@ namespace OSL.Forum.Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+
+        [Authorize, HttpPost, ValidateAntiForgeryToken]
+        public ActionResult NewTopic(NewTopicModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+            try
+            {
+                model.Resolve(_scope);
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Invalid attempt in url.");
+                _logger.Error(ex.Message);
+                return RedirectToAction("Index", "Home");
+            }
+        }
     }
 }

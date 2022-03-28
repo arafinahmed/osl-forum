@@ -2,6 +2,7 @@
 using log4net;
 using OSL.Forum.Web.Models.Category;
 using OSL.Forum.Web.Models.Forum;
+using OSL.Forum.Web.Models.Topic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,7 +79,20 @@ namespace OSL.Forum.Web.Controllers
         [Authorize]
         public ActionResult NewTopic(Guid? id)
         {
-            return View();
+            if (id == null)
+                return RedirectToAction("Index", "Home");
+            try
+            {
+                var model = _scope.Resolve<NewTopicModel>();
+                model.Load(Guid.Parse(id.ToString()));
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Invalid attempt in url.");
+                _logger.Error(ex.Message);
+                return RedirectToAction("Index", "Home");
+            }
         }
     }
 }

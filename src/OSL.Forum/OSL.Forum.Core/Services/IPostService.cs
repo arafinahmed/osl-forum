@@ -6,5 +6,6 @@ namespace OSL.Forum.Core.Services
 {
     public interface IPostService
     {
+        void CreatePost(BO.Post post);
     }
 }

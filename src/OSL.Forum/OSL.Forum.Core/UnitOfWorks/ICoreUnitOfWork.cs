@@ -12,5 +12,7 @@ namespace OSL.Forum.Core.UnitOfWorks
     {
         ICategoryRepository Categories { get; }
         IForumRepository Forums { get; }
+        ITopicRepository Topics { get; }
+        IPostRepository Posts { get; }
     }
 }

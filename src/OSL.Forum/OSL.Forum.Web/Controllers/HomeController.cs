@@ -103,7 +103,8 @@ namespace OSL.Forum.Web.Controllers
             try
             {
                 model.Resolve(_scope);
-                return View(model);
+                model.AddTopic();
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
             {

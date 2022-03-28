@@ -22,5 +22,16 @@ namespace OSL.Forum.Core.Services
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
+
+        public void CreatePost(BO.Post post)
+        {
+            if (post is null)
+                throw new ArgumentNullException(nameof(post));
+
+            var postEntity = _mapper.Map<EO.Post>(post);
+
+            _unitOfWork.Posts.Add(postEntity);
+            _unitOfWork.Save();
+        }
     }
 }

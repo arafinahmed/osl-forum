@@ -70,11 +70,12 @@ namespace OSL.Forum.Core.Services
             if (forumId == Guid.Empty)
                 throw new ArgumentNullException("Forum id is empty.");
 
-            var forumEntity = _unitOfWork.Forums.GetById(forumId);
+            var forumEntity = _unitOfWork.Forums.Get(c => c.Id == forumId, "Topics").FirstOrDefault();
 
             if (forumEntity == null)
                 return null;
-
+            
+            forumEntity.Topics = forumEntity.Topics.OrderByDescending(t => t.ModificationDate).ToList();
             return _mapper.Map<BO.Forum>(forumEntity);
         }
 

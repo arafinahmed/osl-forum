@@ -237,6 +237,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Topic\NewTopicModel.cs" />
+    <Compile Include="Models\Topic\TopicDetailsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Seeds\IdentityHelper.cs" />
     <Compile Include="Seeds\Roles.cs" />

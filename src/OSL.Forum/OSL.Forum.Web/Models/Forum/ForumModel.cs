@@ -20,6 +20,7 @@ namespace OSL.Forum.Web.Models.Forum
         private ICategoryService _categoryService;
         private IForumService _forumService;
         private IMapper _mapper;
+        public IList<BO.Topic> Topics { get; set; }
 
         public ForumModel()
         {

@@ -51,6 +51,7 @@ namespace OSL.Forum.Web
             builder.RegisterType<CategoryModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<ForumModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<NewTopicModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<TopicDetailsModel>().AsSelf().InstancePerLifetimeScope();
 
             base.Load(builder);
         }

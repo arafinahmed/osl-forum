@@ -8,6 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OSL.Forum.Core.Enums;
 
 namespace OSL.Forum.Core.Services
 {
@@ -39,6 +40,23 @@ namespace OSL.Forum.Core.Services
             _unitOfWork.Save();
 
             return topicEntity.Id;
+        }
+
+        public BO.Topic GetTopic(Guid topicId)
+        {
+            if (topicId == Guid.Empty)
+                throw new ArgumentNullException(nameof(topicId));
+
+            var topicEntity = _unitOfWork.Topics.GetById(topicId);
+            var postList = _unitOfWork.Posts.Get(p => p.TopicId == topicId && p.Status == Status.Pending.ToString(), "");
+
+            if (topicEntity == null)
+                return null;
+            
+            topicEntity.Posts = postList;
+            var topic = _mapper.Map<BO.Topic>(topicEntity);
+
+            return topic;
         }
     }
 }

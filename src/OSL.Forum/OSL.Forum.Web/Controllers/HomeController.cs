@@ -113,5 +113,25 @@ namespace OSL.Forum.Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+
+        public ActionResult TopicDetails(Guid? id)
+        {
+            if (id == null)
+                return RedirectToAction("Index", "Home");
+
+            var model = _scope.Resolve<TopicDetailsModel>();
+            
+            try
+            {
+                model.Load(Guid.Parse(id.ToString()));
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Invalid attempt in url.");
+                _logger.Error(ex.Message);
+                return RedirectToAction("Index", "Home");
+            }
+        }
     }
 }

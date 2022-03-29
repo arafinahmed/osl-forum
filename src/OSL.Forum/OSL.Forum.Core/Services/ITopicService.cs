@@ -7,5 +7,6 @@ namespace OSL.Forum.Core.Services
     public interface ITopicService
     {
         Guid Create(BO.Topic topic);
+        BO.Topic GetTopic(Guid topicId);
     }
 }

@@ -363,6 +363,7 @@
     <Content Include="Views\Home\Category.cshtml" />
     <Content Include="Views\Home\Forum.cshtml" />
     <Content Include="Views\Home\NewTopic.cshtml" />
+    <Content Include="Views\Home\TopicDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

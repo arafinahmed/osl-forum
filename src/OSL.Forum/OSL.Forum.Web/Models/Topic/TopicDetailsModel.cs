@@ -9,7 +9,6 @@ namespace OSL.Forum.Web.Models.Topic
 {
     public class TopicDetailsModel
     {
-        public string Description { get; set; }
         public string ForumName { get; set; }
         public string CategoryName { get; set; }
         public Guid CategoryId { get; set; }

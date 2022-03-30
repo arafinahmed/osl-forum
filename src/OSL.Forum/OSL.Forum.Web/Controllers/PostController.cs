@@ -31,6 +31,8 @@ namespace OSL.Forum.Web.Controllers
             {
                 var model = _scope.Resolve<EditPostModel>();
                 model.Load(Guid.Parse(id.ToString()));
+                if(!model.Owner)
+                    return RedirectToAction("TopicDetails", "Home", new { id = model.Topic.Id });
                 return View(model);
             }
             catch (Exception ex)
@@ -57,7 +59,7 @@ namespace OSL.Forum.Web.Controllers
             {
                 _logger.Error("Invalid attempt in url.");
                 _logger.Error(ex.Message);
-                return RedirectToAction("Index", "Home");
+                return View(model);
             }
         }
     }

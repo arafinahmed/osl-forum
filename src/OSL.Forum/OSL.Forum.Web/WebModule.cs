@@ -55,6 +55,7 @@ namespace OSL.Forum.Web
             builder.RegisterType<TopicDetailsModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<EditPostModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<DeletePostModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<ReplyPostModel>().AsSelf().InstancePerLifetimeScope();
 
             base.Load(builder);
         }

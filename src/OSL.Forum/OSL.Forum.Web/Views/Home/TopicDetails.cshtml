@@ -33,7 +33,7 @@
         <div>
             @foreach (var post in Model.Topic.Posts)
             {
-                <div class="col-sm-12">
+                <div class="col-sm-12 mb-3">
                     <div class="card">
                         <div class="card-header bg-primary ">
                             <div class="d-flex justify-content-between">
@@ -81,7 +81,6 @@
                 </div>
             }
         </div>
-        <br />
         @{
             if (Model.Topic.Posts.Count > 0)
             {

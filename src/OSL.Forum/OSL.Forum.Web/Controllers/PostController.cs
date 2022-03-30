@@ -77,9 +77,42 @@ namespace OSL.Forum.Web.Controllers
         }
 
         [Authorize]
-        public ActionResult Reply(Guid id)
+        public ActionResult Reply(Guid? id)
         {
-            return View();
+            if (id == null)
+                return RedirectToAction("Index", "Home");
+            try
+            {
+                var model = _scope.Resolve<ReplyPostModel>();
+                model.Load(Guid.Parse(id.ToString()));
+                return View(model);
+            }
+            catch
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        [Authorize, HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Reply(ReplyPostModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            try
+            {
+                model.Resolve(_scope);
+                model.CreatePost();
+                return RedirectToAction("TopicDetails", "Home", new { id = model.TopicId });
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Invalid attempt in url.");
+                _logger.Error(ex.Message);
+                return View(model);
+            }
         }
     }
 }

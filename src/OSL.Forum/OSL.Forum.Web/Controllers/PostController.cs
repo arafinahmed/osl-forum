@@ -31,7 +31,7 @@ namespace OSL.Forum.Web.Controllers
             {
                 var model = _scope.Resolve<EditPostModel>();
                 model.Load(Guid.Parse(id.ToString()));
-                return View();
+                return View(model);
             }
             catch (Exception ex)
             {

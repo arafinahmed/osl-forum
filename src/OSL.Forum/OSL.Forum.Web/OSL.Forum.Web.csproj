@@ -237,6 +237,7 @@
     <Compile Include="Models\Forum\ForumModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Post\EditPostModel.cs" />
     <Compile Include="Models\Topic\NewTopicModel.cs" />
     <Compile Include="Models\Topic\TopicDetailsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -5,6 +5,7 @@ using OSL.Forum.Web.Areas.Dashboard.Models.Category;
 using OSL.Forum.Web.Areas.Dashboard.Models.Forum;
 using OSL.Forum.Web.Models.Category;
 using OSL.Forum.Web.Models.Forum;
+using OSL.Forum.Web.Models.Post;
 using OSL.Forum.Web.Models.Topic;
 using OSL.Forum.Web.Profiles;
 using OSL.Forum.Web.Services;
@@ -52,6 +53,7 @@ namespace OSL.Forum.Web
             builder.RegisterType<ForumModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<NewTopicModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<TopicDetailsModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<EditPostModel>().AsSelf().InstancePerLifetimeScope();
 
             base.Load(builder);
         }

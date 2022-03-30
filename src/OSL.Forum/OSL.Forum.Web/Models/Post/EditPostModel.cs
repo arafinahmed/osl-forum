@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using AutoMapper;
 using OSL.Forum.Core.Services;
 using OSL.Forum.Core.Utilities;
 using OSL.Forum.Web.Services;
@@ -8,11 +9,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BO = OSL.Forum.Core.BusinessObjects;
 
 namespace OSL.Forum.Web.Models.Post
 {
     public class EditPostModel
     {
+        public Guid Id { get; set; }
         [Required]
         [Display(Name = "Subject")]
         [StringLength(64, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 5)]
@@ -23,10 +26,10 @@ namespace OSL.Forum.Web.Models.Post
         [Display(Name = "Description")]
         [StringLength(10000, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 50)]
         public string Description { get; set; }
-        public string ForumName { get; set; }
-        public string CategoryName { get; set; }
-        public Guid CategoryId { get; set; }
-        public Guid ForumId { get; set; }
+        public BO.Category Category { get; set; }
+        public BO.Forum Forum { get; set; }
+        public BO.Topic Topic { get; set; }
+
         private ILifetimeScope _scope;
         private ICategoryService _categoryService;
         private IForumService _forumService;
@@ -67,17 +70,14 @@ namespace OSL.Forum.Web.Models.Post
             if (postId == Guid.Empty)
                 throw new ArgumentNullException(nameof(postId));
 
-            var forum = _forumService.GetForum(postId);
+            var post = _postService.GetPost(postId);
+            
+            if (post == null)
+                throw new NullReferenceException("Post not found with the post id");
 
-            var category = _categoryService.GetCategory(forum.CategoryId);
-
-            if (category == null)
-                throw new InvalidOperationException("Category not found");
-
-            CategoryName = category.Name;
-            ForumName = forum.Name;
-            CategoryId = category.Id;
-            ForumId = forum.Id;
+            Id = post.Id;
+            Name = post.Name;
+            Description = post.Description;
         }
     }
 }

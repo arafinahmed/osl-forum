@@ -33,5 +33,20 @@ namespace OSL.Forum.Core.Services
             _unitOfWork.Posts.Add(postEntity);
             _unitOfWork.Save();
         }
+
+        public BO.Post GetPost(Guid postId)
+        {
+            if (postId == Guid.Empty)
+                throw new ArgumentNullException(nameof(postId));
+
+            var postEntity = _unitOfWork.Posts.Get(p => p.Id == postId, "").FirstOrDefault();
+
+            if (postEntity == null)
+                return null;
+
+            var post = _mapper.Map<BO.Post>(postEntity);
+
+            return post;
+        }
     }
 }

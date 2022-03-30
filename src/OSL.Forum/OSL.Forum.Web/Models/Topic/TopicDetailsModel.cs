@@ -14,7 +14,7 @@ namespace OSL.Forum.Web.Models.Topic
         public Guid CategoryId { get; set; }
         public Guid ForumId { get; set; }
         public BO.Topic Topic { get; set; }
-        private ILifetimeScope _scope;
+        
         private ICategoryService _categoryService;
         private ITopicService _topicService;
         private IProfileService _profileService;

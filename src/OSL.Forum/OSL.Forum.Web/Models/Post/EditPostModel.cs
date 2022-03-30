@@ -78,6 +78,10 @@ namespace OSL.Forum.Web.Models.Post
             Id = post.Id;
             Name = post.Name;
             Description = post.Description;
+
+            Topic = _topicService.GetTopic(post.TopicId);
+            Forum = _forumService.GetForum(Topic.ForumId);
+            Category = _categoryService.GetCategory(Forum.CategoryId);
         }
     }
 }

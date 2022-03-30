@@ -2,6 +2,7 @@
 using log4net;
 using OSL.Forum.Web.Models.Category;
 using OSL.Forum.Web.Models.Forum;
+using OSL.Forum.Web.Models.Post;
 using OSL.Forum.Web.Models.Topic;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,16 @@ namespace OSL.Forum.Web.Controllers
         {
             if (id == null)
                 return RedirectToAction("Index", "Home");
-            return View();
+            try
+            {
+                var model = _scope.Resolve<EditPostModel>();
+                model.Load(Guid.Parse(id.ToString()));
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return View();
+            }
         }
     }
 }

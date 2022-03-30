@@ -14,6 +14,7 @@ namespace OSL.Forum.Web.Models.Post
         private ILifetimeScope _scope;
         private IPostService _postService;
         private IProfileService _profileService;
+        public Guid TopicId { get; set; }
 
         public DeletePostModel() { }
 
@@ -38,6 +39,7 @@ namespace OSL.Forum.Web.Models.Post
             var post = _postService.GetPost(id);
             if (post == null)
                 throw new InvalidOperationException("No post is found to delte.");
+            TopicId = post.TopicId;
             
             var owner = _profileService.Owner(post.ApplicationUserId);
             var roles = await _profileService.UserRoles();

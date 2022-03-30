@@ -7,6 +7,7 @@ using OSL.Forum.Web.Models.Topic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -61,6 +62,18 @@ namespace OSL.Forum.Web.Controllers
                 _logger.Error(ex.Message);
                 return View(model);
             }
+        }
+
+        [Authorize, HttpPost, ValidateAntiForgeryToken]
+        public async Task<ActionResult> Delete(Guid id)
+        {
+            var model = _scope.Resolve<DeletePostModel>();
+            await model.Delete(id);
+            
+            if(model.TopicId == Guid.Empty)
+                return RedirectToAction("Index", "Home");
+
+            return RedirectToAction("TopicDetails", "Home", new { id = model.TopicId });
         }
     }
 }

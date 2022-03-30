@@ -365,6 +365,7 @@
     <Content Include="Views\Home\Forum.cshtml" />
     <Content Include="Views\Home\NewTopic.cshtml" />
     <Content Include="Views\Home\TopicDetails.cshtml" />
+    <Content Include="Views\Post\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

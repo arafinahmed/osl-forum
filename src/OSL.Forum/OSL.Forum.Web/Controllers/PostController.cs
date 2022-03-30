@@ -20,5 +20,13 @@ namespace OSL.Forum.Web.Controllers
         {
             _scope = scope;
         }
+        
+        [Authorize]
+        public ActionResult Edit(Guid? id)
+        {
+            if (id == null)
+                return RedirectToAction("Index", "Home");
+            return View();
+        }
     }
 }

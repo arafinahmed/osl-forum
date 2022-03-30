@@ -33,5 +33,37 @@ namespace OSL.Forum.Core.Services
             _unitOfWork.Posts.Add(postEntity);
             _unitOfWork.Save();
         }
+
+        public BO.Post GetPost(Guid postId)
+        {
+            if (postId == Guid.Empty)
+                throw new ArgumentNullException(nameof(postId));
+
+            var postEntity = _unitOfWork.Posts.Get(p => p.Id == postId, "").FirstOrDefault();
+
+            if (postEntity == null)
+                return null;
+
+            var post = _mapper.Map<BO.Post>(postEntity);
+
+            return post;
+        }
+
+        public void EditPost(BO.Post post)
+        {
+            if (post is null)
+                throw new ArgumentNullException(nameof(post));
+
+            var postEntity = _unitOfWork.Posts.GetById(post.Id);
+
+            if (postEntity is null)
+                throw new InvalidOperationException("Post is not found.");
+
+            postEntity.Name = post.Name;
+            postEntity.Description = post.Description;
+            postEntity.ModificationDate = post.ModificationDate;
+
+            _unitOfWork.Save();
+        }
     }
 }

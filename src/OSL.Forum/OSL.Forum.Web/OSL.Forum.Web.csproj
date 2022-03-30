@@ -219,6 +219,7 @@
     <Compile Include="Areas\Dashboard\Models\Forum\EditForumModel.cs" />
     <Compile Include="Areas\Dashboard\Models\Forum\CreateForumModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Extensions\IdentityExtensions.cs" />
@@ -236,6 +237,7 @@
     <Compile Include="Models\Forum\ForumModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Post\EditPostModel.cs" />
     <Compile Include="Models\Topic\NewTopicModel.cs" />
     <Compile Include="Models\Topic\TopicDetailsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -364,6 +366,7 @@
     <Content Include="Views\Home\Forum.cshtml" />
     <Content Include="Views\Home\NewTopic.cshtml" />
     <Content Include="Views\Home\TopicDetails.cshtml" />
+    <Content Include="Views\Post\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -55,6 +55,8 @@ namespace OSL.Forum.Web.Controllers
             }
             catch (Exception ex)
             {
+                _logger.Error("Invalid attempt in url.");
+                _logger.Error(ex.Message);
                 return RedirectToAction("Index", "Home");
             }
         }

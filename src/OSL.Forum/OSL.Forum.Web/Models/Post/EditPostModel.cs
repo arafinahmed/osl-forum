@@ -83,5 +83,18 @@ namespace OSL.Forum.Web.Models.Post
             Forum = _forumService.GetForum(Topic.ForumId);
             Category = _categoryService.GetCategory(Forum.CategoryId);
         }
+
+        public void Edit()
+        {
+            var post = new BO.Post
+            {
+                Id = Id,
+                Name = Name,
+                Description = Description,
+                ModificationDate = _dateTimeUtility.Now
+            };
+            
+            _postService.EditPost(post);
+        }
     }
 }

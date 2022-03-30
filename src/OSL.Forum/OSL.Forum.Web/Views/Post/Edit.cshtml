@@ -20,14 +20,17 @@
             <div class="card border-primary mt-2" style="max-width: 45rem; min-width:25rem;">
                 <div class="card-body">
                     <h5>Edit post</h5>
-                    @using (Html.BeginForm("NewTopic", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "#myForm" }))
+                    @using (Html.BeginForm("Edit", "Post", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "#myForm" }))
                     {
                         <br />
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         @Html.HiddenFor(m => m.Category.Name)
+                        @Html.HiddenFor(m => m.Category.Id)
                         @Html.HiddenFor(m => m.Forum.Id)
                         @Html.HiddenFor(m => m.Forum.Name)
+                        @Html.HiddenFor(m => m.Id);
+                        @Html.HiddenFor(m => m.Topic.Id);
                         <div class="form-group">
                             @Html.LabelFor(m => m.Name, new { @class = "control-label text-primary" })
                             <div class="">

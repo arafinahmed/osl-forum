@@ -35,7 +35,27 @@ namespace OSL.Forum.Web.Controllers
             }
             catch (Exception ex)
             {
-                return View();
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        [Authorize, HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Edit(EditPostModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            try
+            {
+                model.Resolve(_scope);
+                model.Edit();
+                return RedirectToAction("TopicDetails", "Home", new { id = model.Topic.Id });
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index", "Home");
             }
         }
     }

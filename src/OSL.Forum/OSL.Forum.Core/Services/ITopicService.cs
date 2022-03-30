@@ -8,5 +8,6 @@ namespace OSL.Forum.Core.Services
     {
         Guid Create(BO.Topic topic);
         BO.Topic GetTopic(Guid topicId);
+        BO.Topic Get(Guid topicId);
     }
 }

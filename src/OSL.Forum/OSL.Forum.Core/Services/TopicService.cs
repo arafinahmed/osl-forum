@@ -58,5 +58,20 @@ namespace OSL.Forum.Core.Services
 
             return topic;
         }
+
+        public BO.Topic Get(Guid topicId)
+        {
+            if (topicId == Guid.Empty)
+                throw new ArgumentNullException(nameof(topicId));
+
+            var topicEntity = _unitOfWork.Topics.GetDynamic(t => t.Id == topicId, null, "", false).FirstOrDefault();
+
+            if (topicEntity == null)
+                return null;
+
+            var topic = _mapper.Map<BO.Topic>(topicEntity);
+
+            return topic;
+        }
     }
 }

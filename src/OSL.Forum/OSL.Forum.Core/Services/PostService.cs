@@ -65,5 +65,14 @@ namespace OSL.Forum.Core.Services
 
             _unitOfWork.Save();
         }
+
+        public void Delete(Guid postId)
+        {
+            if (postId == Guid.Empty)
+                throw new ArgumentNullException(nameof(postId));
+
+            _unitOfWork.Posts.Remove(postId);
+            _unitOfWork.Save();
+        }
     }
 }

@@ -237,6 +237,7 @@
     <Compile Include="Models\Forum\ForumModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Post\DeletePostModel.cs" />
     <Compile Include="Models\Post\EditPostModel.cs" />
     <Compile Include="Models\Topic\NewTopicModel.cs" />
     <Compile Include="Models\Topic\TopicDetailsModel.cs" />
@@ -367,6 +368,7 @@
     <Content Include="Views\Home\NewTopic.cshtml" />
     <Content Include="Views\Home\TopicDetails.cshtml" />
     <Content Include="Views\Post\Edit.cshtml" />
+    <Content Include="Views\Shared\_DeleteModalPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

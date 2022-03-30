@@ -104,7 +104,7 @@ namespace OSL.Forum.Web.Controllers
             {
                 model.Resolve(_scope);
                 model.AddTopic();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Forum", "Home", new { id = model.ForumId});
             }
             catch (Exception ex)
             {

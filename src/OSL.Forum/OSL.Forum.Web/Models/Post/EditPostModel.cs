@@ -29,6 +29,7 @@ namespace OSL.Forum.Web.Models.Post
         public BO.Category Category { get; set; }
         public BO.Forum Forum { get; set; }
         public BO.Topic Topic { get; set; }
+        public bool Owner { get; set; }
 
         private ILifetimeScope _scope;
         private ICategoryService _categoryService;
@@ -82,10 +83,21 @@ namespace OSL.Forum.Web.Models.Post
             Topic = _topicService.Get(post.TopicId);
             Forum = _forumService.GetForum(Topic.ForumId);
             Category = _categoryService.GetCategory(Forum.CategoryId);
+            Owner = _profileService.Owner(post.ApplicationUserId);
         }
 
         public void Edit()
         {
+            var postBO = _postService.GetPost(Id);
+            
+            if (postBO == null)
+                throw new NullReferenceException("Post not found with the post id");
+
+            Owner = _profileService.Owner(postBO.ApplicationUserId);
+
+            if (!Owner)
+                throw new InvalidOperationException("You are not permitted to edit.");
+
             var post = new BO.Post
             {
                 Id = Id,

@@ -48,5 +48,22 @@ namespace OSL.Forum.Core.Services
 
             return post;
         }
+
+        public void EditPost(BO.Post post)
+        {
+            if (post is null)
+                throw new ArgumentNullException(nameof(post));
+
+            var postEntity = _unitOfWork.Posts.GetById(post.Id);
+
+            if (postEntity is null)
+                throw new InvalidOperationException("Post is not found.");
+
+            postEntity.Name = post.Name;
+            postEntity.Description = post.Description;
+            postEntity.ModificationDate = post.ModificationDate;
+
+            _unitOfWork.Save();
+        }
     }
 }

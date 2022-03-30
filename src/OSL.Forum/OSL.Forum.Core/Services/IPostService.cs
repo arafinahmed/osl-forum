@@ -8,5 +8,6 @@ namespace OSL.Forum.Core.Services
     {
         void CreatePost(BO.Post post);
         BO.Post GetPost(Guid postId);
+        void EditPost(BO.Post post);
     }
 }

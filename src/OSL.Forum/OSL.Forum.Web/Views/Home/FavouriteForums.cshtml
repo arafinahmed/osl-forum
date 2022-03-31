@@ -1,0 +1,26 @@
+﻿@model OSL.Forum.Web.Models.FavoriteForum.LoadFavForumModel
+@{
+    ViewBag.Title = "Favorite Forums";
+}
+
+<div class="container d-flex justify-content-center mt-2">
+    <div class="col-md-9">
+        <div class="d-flex justify-content-between">
+            <h3 class="text-primary">Favorite Forums</h3>
+        </div>
+        <div class="" style="display:grid; grid-template-columns: repeat(3, 1fr); grid-gap: 1rem;">
+            @{
+                foreach (var forum in Model.FavoriteForums)
+                {
+                    <div class="card border-primary mb-3" style="max-width: 18rem;">
+                        <div class="card-header text-primary">
+                            <div class="d-flex justify-content-between">
+                                <h5><a style="text-decoration:none;" href="@Url.Action("Forum", "Home", new {Area = "", id = forum.Forum.Id })">@forum.Forum.Name</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

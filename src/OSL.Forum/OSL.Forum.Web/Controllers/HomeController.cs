@@ -170,5 +170,13 @@ namespace OSL.Forum.Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+
+        [Authorize]
+        public ActionResult FavouriteForums()
+        {
+            var model = _scope.Resolve<LoadFavForumModel>();
+            model.Load();
+            return View(model);
+        }
     }
 }

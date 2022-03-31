@@ -40,6 +40,8 @@ namespace OSL.Forum.Core
                 .InstancePerLifetimeScope();
             builder.RegisterType<TopicRepository>().As<ITopicRepository>()
                 .InstancePerLifetimeScope();
+            builder.RegisterType<FavoriteForumRepository>().As<IFavoriteForumRepository>()
+                .InstancePerLifetimeScope();
 
             //Unit Of Work
             builder.RegisterType<CoreUnitOfWork>().As<ICoreUnitOfWork>().InstancePerLifetimeScope();

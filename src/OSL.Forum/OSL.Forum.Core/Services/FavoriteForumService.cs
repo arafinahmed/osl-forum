@@ -22,5 +22,20 @@ namespace OSL.Forum.Core.Services
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
+
+        public void AddToFavorite(BO.FavoriteForum favoriteForum)
+        {
+            if (favoriteForum == null)
+                throw new ArgumentNullException("Favourite Forum not provided.");
+
+            var oldFavoriteForum = _unitOfWork.FavoriteForums.Get(x => x.ApplicationUserId == favoriteForum.ApplicationUserId && x.ForumId == favoriteForum.ForumId, "").FirstOrDefault();
+
+            if (oldFavoriteForum != null)
+                throw new InvalidOperationException("The Forum is already in your Favorite list.");
+
+            var favoriteForumEntity = _mapper.Map<EO.FavoriteForum>(favoriteForum);
+            _unitOfWork.FavoriteForums.Add(favoriteForumEntity);
+            _unitOfWork.Save();
+        }
     }
 }

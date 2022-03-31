@@ -82,6 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessObjects\FavoriteForum.cs" />
     <Compile Include="BusinessObjects\Forum.cs" />
     <Compile Include="BusinessObjects\Post.cs" />
     <Compile Include="BusinessObjects\Topic.cs" />

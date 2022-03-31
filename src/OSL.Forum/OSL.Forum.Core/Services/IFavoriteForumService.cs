@@ -6,5 +6,6 @@ namespace OSL.Forum.Core.Services
 {
     public interface IFavoriteForumService
     {
+        void AddToFavorite(BO.FavoriteForum favoriteForum);
     }
 }

@@ -37,12 +37,13 @@ namespace OSL.Forum.Web.Models.Category
         public void GetCategories()
         {
             Categories = _categoryService.GetCategories();
-
+            FavoriteForums = new List<BO.FavoriteForum>();
             var user = _profileService.GetUser();
             if(user != null)
             {
                 FavoriteForums = _favoriteForumService.GetUserFavoriteForums(user.Id).Take(4).ToList();
             }
+            
         }
     }
 }

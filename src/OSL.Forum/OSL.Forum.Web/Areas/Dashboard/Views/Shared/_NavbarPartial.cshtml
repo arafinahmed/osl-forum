@@ -29,7 +29,7 @@
                         </li>
                     }
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Login", "Account", new {Area = "" })">@User.Identity.GetFullName()</a>
+                        <a class="nav-link" href="@Url.Action("Me", "Profile", new {Area = "" })">@User.Identity.GetFullName()</a>
                     </li>
                     <!--<li>-->@*<a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>*@<!--</li>-->
                     <li class="nav-item">

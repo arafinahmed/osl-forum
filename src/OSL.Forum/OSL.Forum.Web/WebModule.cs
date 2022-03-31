@@ -7,6 +7,7 @@ using OSL.Forum.Web.Models.Category;
 using OSL.Forum.Web.Models.FavoriteForum;
 using OSL.Forum.Web.Models.Forum;
 using OSL.Forum.Web.Models.Post;
+using OSL.Forum.Web.Models.Profile;
 using OSL.Forum.Web.Models.Topic;
 using OSL.Forum.Web.Profiles;
 using OSL.Forum.Web.Services;
@@ -60,6 +61,7 @@ namespace OSL.Forum.Web
             builder.RegisterType<FavoriteForumModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<LoadFavForumModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<LoadUserPostModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<EditProfileModel>().AsSelf().InstancePerLifetimeScope();
 
             base.Load(builder);
         }

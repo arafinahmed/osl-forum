@@ -244,6 +244,7 @@
     <Compile Include="Models\Post\EditPostModel.cs" />
     <Compile Include="Models\Post\LoadUserPostModel.cs" />
     <Compile Include="Models\Post\ReplyPostModel.cs" />
+    <Compile Include="Models\Profile\EditProfileModel.cs" />
     <Compile Include="Models\Topic\NewTopicModel.cs" />
     <Compile Include="Models\Topic\TopicDetailsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -377,6 +378,7 @@
     <Content Include="Views\Post\Reply.cshtml" />
     <Content Include="Views\Home\FavouriteForums.cshtml" />
     <Content Include="Views\Profile\Me.cshtml" />
+    <Content Include="Views\Profile\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

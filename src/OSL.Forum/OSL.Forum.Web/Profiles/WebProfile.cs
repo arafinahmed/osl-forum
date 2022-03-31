@@ -4,6 +4,8 @@ using OSL.Forum.Web.Areas.Dashboard.Models.Category;
 using OSL.Forum.Web.Areas.Dashboard.Models.Forum;
 using OSL.Forum.Web.Models.Category;
 using OSL.Forum.Web.Models.Forum;
+using OSL.Forum.Web.Models;
+using OSL.Forum.Web.Models.Profile;
 
 namespace OSL.Forum.Web.Profiles
 {
@@ -17,6 +19,8 @@ namespace OSL.Forum.Web.Profiles
             CreateMap<EditForumModel, BO.Forum>().ReverseMap();
             CreateMap<CategoryModel, BO.Category>().ReverseMap();
             CreateMap<ForumModel, BO.Forum>().ReverseMap();
+            CreateMap<ApplicationUser, ApplicationUser>().ReverseMap();
+            CreateMap<EditProfileModel, ApplicationUser>().ReverseMap();
         }
     }
 }

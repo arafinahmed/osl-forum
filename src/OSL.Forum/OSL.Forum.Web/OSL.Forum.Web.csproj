@@ -235,6 +235,7 @@
     <Compile Include="Models\Category\AllCategoryModel.cs" />
     <Compile Include="Models\Category\CategoryModel.cs" />
     <Compile Include="Models\FavoriteForum\FavoriteForumModel.cs" />
+    <Compile Include="Models\FavoriteForum\LoadFavForumModel.cs" />
     <Compile Include="Models\Forum\ForumModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -372,6 +373,7 @@
     <Content Include="Views\Post\Edit.cshtml" />
     <Content Include="Views\Shared\_DeleteModalPartial.cshtml" />
     <Content Include="Views\Post\Reply.cshtml" />
+    <Content Include="Views\Home\FavouriteForums.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

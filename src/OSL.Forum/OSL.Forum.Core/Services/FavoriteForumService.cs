@@ -62,5 +62,20 @@ namespace OSL.Forum.Core.Services
             _unitOfWork.FavoriteForums.Remove(oldFavoriteForum.Id);
             _unitOfWork.Save();
         }
+
+        public List<BO.FavoriteForum> GetUserFavoriteForums(string userId)
+        {
+            if (userId == string.Empty)
+                return null;
+
+            var favoriteForumsEntity = _unitOfWork.FavoriteForums
+                .Get(ff => ff.ApplicationUserId == userId, "");
+
+            var favoriteForums = favoriteForumsEntity.Select(favoriteForum =>
+                _mapper.Map<BO.FavoriteForum>(favoriteForum)
+                ).ToList();
+
+            return favoriteForums;
+        }
     }
 }

@@ -108,6 +108,10 @@
     <Compile Include="Migrations\202203271209438_postandtopics.Designer.cs">
       <DependentUpon>202203271209438_postandtopics.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202203310521511_FavForum.cs" />
+    <Compile Include="Migrations\202203310521511_FavForum.Designer.cs">
+      <DependentUpon>202203310521511_FavForum.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Profiles\CoreProfiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -145,6 +149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202203271209438_postandtopics.resx">
       <DependentUpon>202203271209438_postandtopics.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203310521511_FavForum.resx">
+      <DependentUpon>202203310521511_FavForum.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

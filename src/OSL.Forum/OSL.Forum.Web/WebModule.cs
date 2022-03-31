@@ -4,6 +4,7 @@ using OSL.Forum.Core.Profiles;
 using OSL.Forum.Web.Areas.Dashboard.Models.Category;
 using OSL.Forum.Web.Areas.Dashboard.Models.Forum;
 using OSL.Forum.Web.Models.Category;
+using OSL.Forum.Web.Models.FavoriteForum;
 using OSL.Forum.Web.Models.Forum;
 using OSL.Forum.Web.Models.Post;
 using OSL.Forum.Web.Models.Topic;
@@ -56,6 +57,7 @@ namespace OSL.Forum.Web
             builder.RegisterType<EditPostModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<DeletePostModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<ReplyPostModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<FavoriteForumModel>().AsSelf().InstancePerLifetimeScope();
 
             base.Load(builder);
         }

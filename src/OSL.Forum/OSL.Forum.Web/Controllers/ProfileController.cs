@@ -3,6 +3,7 @@ using log4net;
 using OSL.Forum.Web.Models.Category;
 using OSL.Forum.Web.Models.Forum;
 using OSL.Forum.Web.Models.Post;
+using OSL.Forum.Web.Models.Profile;
 using OSL.Forum.Web.Models.Topic;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,30 @@ namespace OSL.Forum.Web.Controllers
             var model = _scope.Resolve<LoadUserPostModel>();
             model.Load();
             return View(model);
+        }
+
+        public ActionResult Edit()
+        {
+            var model = _scope.Resolve<EditProfileModel>();
+            model.LoadUserInfo();
+            return View(model);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(EditProfileModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+            try
+            {
+                model.Resolve(_scope);
+                await model.EditProfileAsync();
+                return RedirectToAction("Me", "Profile");
+            }
+            catch
+            {
+                return RedirectToAction("Me", "Profile");
+            }
         }
     }
 }

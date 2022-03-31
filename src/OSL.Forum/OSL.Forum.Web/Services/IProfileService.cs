@@ -15,5 +15,6 @@ namespace OSL.Forum.Web.Services
         Task<IList<string>> UserRoles();
         bool Owner(string userId);
         bool IsAuthenticated();
+        Task EditProfileAsync(ApplicationUser applicationUser);
     }
 }

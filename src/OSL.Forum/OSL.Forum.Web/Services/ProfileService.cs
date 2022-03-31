@@ -61,5 +61,23 @@ namespace OSL.Forum.Web.Services
         {
             return HttpContext.Current.User.Identity.IsAuthenticated;
         }
+
+        public async Task EditProfileAsync(ApplicationUser applicationUser)
+        {
+            if (applicationUser == null)
+                throw new ArgumentNullException(nameof(applicationUser));
+
+            var user = UserManager.FindById(applicationUser.Id);
+
+            if (user.Name == applicationUser.Name)
+                throw new InvalidOperationException("The name is the same as your previous name.");
+
+            user.Name = applicationUser.Name;
+
+            var result = await UserManager.UpdateAsync(user);
+
+            if (!result.Succeeded)
+                throw new InvalidOperationException("User profile update failed.");
+        }
     }
 }

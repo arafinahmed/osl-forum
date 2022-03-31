@@ -13,6 +13,8 @@ namespace OSL.Forum.Web.Models.Post
         private ILifetimeScope _scope;
         private IPostService _postService;
         private IProfileService _profileService;
+        public ApplicationUser ApplicationUser { get; set; }
+
 
         public LoadUserPostModel()
         {
@@ -33,11 +35,11 @@ namespace OSL.Forum.Web.Models.Post
 
         public void Load()
         {
-            var user = _profileService.GetUser();
+            ApplicationUser = _profileService.GetUser();
             Posts = new List<BO.Post>();
-            if (user != null)
+            if (ApplicationUser != null)
             {
-                Posts = _postService.GetPostByUser(user.Id);
+                Posts = _postService.GetPostByUser(ApplicationUser.Id);
             }
         }
     }

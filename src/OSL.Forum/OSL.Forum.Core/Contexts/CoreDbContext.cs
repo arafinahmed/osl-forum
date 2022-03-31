@@ -50,5 +50,6 @@ namespace OSL.Forum.Core.Contexts
         DbSet<EO.Forum> Forums{ get; set; }
         DbSet<EO.Topic> Topics { get; set; }
         DbSet<EO.Post> Posts { get; set; }
+        DbSet<EO.FavoriteForum> FavoriteForums { get; set; }
     }
 }

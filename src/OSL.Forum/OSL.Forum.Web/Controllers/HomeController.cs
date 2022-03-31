@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using log4net;
 using OSL.Forum.Web.Models.Category;
+using OSL.Forum.Web.Models.FavoriteForum;
 using OSL.Forum.Web.Models.Forum;
 using OSL.Forum.Web.Models.Topic;
 using System;
@@ -130,6 +131,42 @@ namespace OSL.Forum.Web.Controllers
             {
                 _logger.Error("Invalid attempt in url.");
                 _logger.Error(ex.Message);
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        [Authorize]
+        public ActionResult AddToFavorite(Guid? id)
+        {
+            if (id == null)
+                return RedirectToAction("Index", "Home");
+
+            try
+            {
+                var model = _scope.Resolve<FavoriteForumModel>();
+                model.AddToFavorite(Guid.Parse(id.ToString()));
+                return RedirectToAction("Forum", "Home", new { id = id });
+            }
+            catch
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        [Authorize]
+        public ActionResult RemoveFromFavorite(Guid? id)
+        {
+            if (id == null)
+                return RedirectToAction("Index", "Home");
+
+            try
+            {
+                var model = _scope.Resolve<FavoriteForumModel>();
+                model.RemoveFromFavorite(Guid.Parse(id.ToString()));
+                return RedirectToAction("Forum", "Home", new { id = id });
+            }
+            catch
+            {
                 return RedirectToAction("Index", "Home");
             }
         }

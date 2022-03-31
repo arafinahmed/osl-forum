@@ -16,16 +16,18 @@ namespace OSL.Forum.Core.UnitOfWorks
         public IForumRepository Forums { get; private set; }
         public ITopicRepository Topics { get; private set; }
         public IPostRepository Posts { get; private set; }
+        public IFavoriteForumRepository FavoriteForums { get; private set; }
 
         public CoreUnitOfWork(ICoreDbContext context,
             ICategoryRepository categories, IForumRepository forums, ITopicRepository topics,
-            IPostRepository posts
+            IPostRepository posts, IFavoriteForumRepository favoriteForums
         ) : base((DbContext)context)
         {
             Categories = categories;
             Forums = forums;
             Topics = topics;
             Posts = posts;
+            FavoriteForums = favoriteForums;
         }
     }
 }

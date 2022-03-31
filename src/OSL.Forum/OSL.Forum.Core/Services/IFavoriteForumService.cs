@@ -9,5 +9,6 @@ namespace OSL.Forum.Core.Services
         void AddToFavorite(BO.FavoriteForum favoriteForum);
         bool IsFavourite(Guid forumId, string userId);
         void RemoveFromFavorite(BO.FavoriteForum favoriteForum);
+        List<BO.FavoriteForum> GetUserFavoriteForums(string userId);
     }
 }

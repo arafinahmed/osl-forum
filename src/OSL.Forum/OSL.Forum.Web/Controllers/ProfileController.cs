@@ -31,7 +31,9 @@ namespace OSL.Forum.Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            return View();
+            var model = _scope.Resolve<LoadUserPostModel>();
+            model.Load();
+            return View(model);
         }
     }
 }

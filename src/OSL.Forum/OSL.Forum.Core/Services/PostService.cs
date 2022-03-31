@@ -74,5 +74,16 @@ namespace OSL.Forum.Core.Services
             _unitOfWork.Posts.Remove(postId);
             _unitOfWork.Save();
         }
+
+        public IList<BO.Post> GetPostByUser(string userId)
+        {
+            var postsEntity = _unitOfWork.Posts.Get(p => p.ApplicationUserId == userId, "");
+
+            var posts = postsEntity.Select(post =>
+                _mapper.Map<BO.Post>(post)
+                ).ToList();
+
+            return posts;
+        }
     }
 }

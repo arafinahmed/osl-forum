@@ -59,6 +59,7 @@ namespace OSL.Forum.Web
             builder.RegisterType<ReplyPostModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<FavoriteForumModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<LoadFavForumModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<LoadUserPostModel>().AsSelf().InstancePerLifetimeScope();
 
             base.Load(builder);
         }

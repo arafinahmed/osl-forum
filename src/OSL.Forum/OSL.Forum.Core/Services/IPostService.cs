@@ -10,5 +10,6 @@ namespace OSL.Forum.Core.Services
         BO.Post GetPost(Guid postId);
         void EditPost(BO.Post post);
         void Delete(Guid postId);
+        IList<BO.Post> GetPostByUser(string userId);
     }
 }

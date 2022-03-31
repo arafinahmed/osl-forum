@@ -7,5 +7,7 @@ namespace OSL.Forum.Core.Services
     public interface IFavoriteForumService
     {
         void AddToFavorite(BO.FavoriteForum favoriteForum);
+        bool IsFavourite(Guid forumId, string userId);
+        void RemoveFromFavorite(BO.FavoriteForum favoriteForum);
     }
 }

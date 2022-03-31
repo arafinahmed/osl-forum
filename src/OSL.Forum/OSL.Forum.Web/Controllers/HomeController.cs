@@ -152,5 +152,23 @@ namespace OSL.Forum.Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+
+        [Authorize]
+        public ActionResult RemoveFromFavorite(Guid? id)
+        {
+            if (id == null)
+                return RedirectToAction("Index", "Home");
+
+            try
+            {
+                var model = _scope.Resolve<FavoriteForumModel>();
+                model.RemoveFromFavorite(Guid.Parse(id.ToString()));
+                return RedirectToAction("Forum", "Home", new { id = id });
+            }
+            catch
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
     }
 }

@@ -38,7 +38,8 @@ namespace OSL.Forum.Web.Models.FavoriteForum
 
         public void RemoveFromFavorite(Guid forumId)
         {
-            throw new NotImplementedException();
+            var user = _profileService.GetUser();
+            _favoriteForumService.RemoveFromFavorite(new BO.FavoriteForum { ForumId = forumId, ApplicationUserId = user.Id });
         }
     }
 }

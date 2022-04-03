@@ -42,7 +42,7 @@ namespace OSL.Forum.Web.Models.Post
             TopicId = post.TopicId;
             
             var owner = _profileService.Owner(post.ApplicationUserId);
-            var roles = await _profileService.UserRoles();
+            var roles = await _profileService.UserRolesAsync();
 
             if (!roles.Contains("SuperAdmin") && !roles.Contains("Admin") && !roles.Contains("Moderator") && !owner)
                 throw new InvalidOperationException("You are not allowed to delete a post.");

@@ -19,5 +19,10 @@ namespace OSL.Forum.Web.Areas.Dashboard.Controllers
         {
             _scope = scope;
         }
+
+        public ActionResult AssignRole()
+        {
+            return View();
+        }
     }
 }

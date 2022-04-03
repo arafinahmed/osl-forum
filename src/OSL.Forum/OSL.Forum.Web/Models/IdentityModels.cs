@@ -34,4 +34,10 @@ namespace OSL.Forum.Web.Models
             return new ApplicationDbContext();
         }
     }
+
+    public class ApplicationUserRole
+    {
+        public string UserId { get; set; }
+        public string UserRole { get; set; }
+    }
 }

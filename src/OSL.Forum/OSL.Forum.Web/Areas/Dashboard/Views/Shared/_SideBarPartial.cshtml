@@ -28,15 +28,20 @@
                 </ul>
             </div>
         </li>
-        <li class="mb-1">
-            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-                User Management
-            </button>
-            <div class="collapse" id="orders-collapse">
-                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#" class="link-dark rounded">Assign Role</a></li>
-                </ul>
-            </div>
-        </li>
+        @{
+            if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
+            {
+                <li class="mb-1">
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+                        User Management
+                    </button>
+                    <div class="collapse" id="orders-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="@Url.Action("AssignRole", "UserManagement", new {Area = "Dashboard" })" class="link-dark rounded">Assign Role</a></li>
+                        </ul>
+                    </div>
+                </li>
+            }
+        }
     </ul>
 </div>

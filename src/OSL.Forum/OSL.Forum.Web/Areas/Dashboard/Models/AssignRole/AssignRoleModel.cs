@@ -23,6 +23,7 @@ namespace OSL.Forum.Web.Areas.Dashboard.Models.AssignRole
         private IProfileService _profileService;
         private IMapper _mapper;
 
+        public List<string> Demo = new List<string> { "One", "Two", "Three" };
         public AssignRoleModel()
         {
         }

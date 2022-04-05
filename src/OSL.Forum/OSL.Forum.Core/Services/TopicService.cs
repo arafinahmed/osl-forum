@@ -48,14 +48,21 @@ namespace OSL.Forum.Core.Services
                 throw new ArgumentNullException(nameof(topicId));
 
             var topicEntity = _unitOfWork.Topics.GetById(topicId);
-            var postList = _unitOfWork.Posts.Get(p => p.TopicId == topicId && p.Status == Status.Pending.ToString(), "");
+            var postListEntity = _unitOfWork.Posts.Get(p => p.TopicId == topicId && p.Status == Status.Approved.ToString(), "");
 
             if (topicEntity == null)
                 return null;
             
-            topicEntity.Posts = postList;
+            var postList = new List<BO.Post>();
             var topic = _mapper.Map<BO.Topic>(topicEntity);
 
+            foreach(var post in postListEntity)
+            {
+                var postBO = _mapper.Map<BO.Post>(post);
+                postList.Add(postBO);
+            }
+
+            topic.Posts = postList;
             return topic;
         }
 

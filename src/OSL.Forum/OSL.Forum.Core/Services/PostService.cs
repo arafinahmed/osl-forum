@@ -110,5 +110,18 @@ namespace OSL.Forum.Core.Services
             post.Status = Status.Approved.ToString();
             _unitOfWork.Save();
         }
+
+        public void RejectPost(Guid postId)
+        {
+            if (postId == null)
+                throw new ArgumentNullException("Post ID not provided");
+
+            var post = _unitOfWork.Posts.GetById(postId);
+            if (post == null)
+                throw new InvalidOperationException("No Post found.");
+
+            post.Status = Status.Rejected.ToString();
+            _unitOfWork.Save();
+        }
     }
 }

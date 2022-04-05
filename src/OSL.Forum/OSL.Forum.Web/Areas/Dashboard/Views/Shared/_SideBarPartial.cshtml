@@ -8,7 +8,7 @@
             </button>
             <div class="collapse" id="home-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="@Url.Action("Index", "Home", new {Area = "" })" class="link-dark rounded">All Categories</a></li>
+                    <li><a href="@Url.Action("Index", "Category", new {Area = "Dashboard" })" class="link-dark rounded">All Categories</a></li>
                     @{
                         if (User.IsInRole("SuperAdmin"))
                         {

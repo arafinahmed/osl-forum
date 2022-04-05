@@ -66,6 +66,7 @@ namespace OSL.Forum.Web
             builder.RegisterType<EditProfileModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<AssignRoleModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<LoadPendingPostsModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<ApprovePostModel>().AsSelf().InstancePerLifetimeScope();
 
             base.Load(builder);
         }

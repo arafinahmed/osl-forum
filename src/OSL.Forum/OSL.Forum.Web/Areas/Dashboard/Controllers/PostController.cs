@@ -29,5 +29,21 @@ namespace OSL.Forum.Web.Areas.Dashboard.Controllers
             await model.Load();
             return View(model);
         }
+
+        public ActionResult Approve(Guid? id)
+        {
+            if(id == null)
+                return RedirectToAction("Pending");
+            
+            var model = _scope.Resolve<ApprovePostModel>();
+            model.Approve(Guid.Parse(id.ToString()));
+            
+            return RedirectToAction("Pending");
+        }
+
+        public ActionResult Reject()
+        {
+            return RedirectToAction("Pending");
+        }
     }
 }

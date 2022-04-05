@@ -6,6 +6,7 @@ using OSL.Forum.Web.Models.Category;
 using OSL.Forum.Web.Models.Forum;
 using OSL.Forum.Web.Models;
 using OSL.Forum.Web.Models.Profile;
+using OSL.Forum.Web.Areas.Dashboard.Models.AssignRole;
 
 namespace OSL.Forum.Web.Profiles
 {
@@ -21,6 +22,7 @@ namespace OSL.Forum.Web.Profiles
             CreateMap<ForumModel, BO.Forum>().ReverseMap();
             CreateMap<ApplicationUser, ApplicationUser>().ReverseMap();
             CreateMap<EditProfileModel, ApplicationUser>().ReverseMap();
+            CreateMap<ApplicationUserRole, AssignRoleModel>().ReverseMap();
         }
     }
 }

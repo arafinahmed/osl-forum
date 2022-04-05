@@ -75,7 +75,7 @@ namespace OSL.Forum.Web.Areas.Dashboard.Models.Forum
             if (user == null)
                 throw new InvalidOperationException("No user found for edit a forum");
 
-            var roles = await _profileService.UserRoles();
+            var roles = await _profileService.UserRolesAsync();
             
             if(!roles.Contains("SuperAdmin") && !roles.Contains("Admin"))
                 throw new InvalidOperationException("You are not allowed to create a forum");

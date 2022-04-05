@@ -1,18 +1,27 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using OSL.Forum.Web.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Mvc;
 
 namespace OSL.Forum.Web.Services
 {
     public class ProfileService : IProfileService
     {
+        private IMapper _mapper;
         private static readonly UserStore<ApplicationUser> UserStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
         private static readonly ApplicationUserManager UserManager = new ApplicationUserManager(UserStore);
+
+        public ProfileService(IMapper mapper)
+        {
+            _mapper = mapper;
+        }
 
         public string UserID()
         {
@@ -37,11 +46,36 @@ namespace OSL.Forum.Web.Services
             return user;
         }
 
-        public async Task<IList<string>> UserRoles()
+        public ApplicationUser GetUserByEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                throw new ArgumentNullException(nameof(email));
+
+            var user = UserManager.FindByEmail(email);
+
+            return user;
+        }
+
+        public async Task<IList<string>> UserRolesAsync()
         {
             var userId = UserID();
 
             return await UserManager.GetRolesAsync(userId);
+        }
+
+        public async Task<IList<string>> UserRolesAsync(string userId)
+        {
+            return await UserManager.GetRolesAsync(userId);
+        }
+
+        public async Task<IList<string>> UserRolesByEmailAsync(string email)
+        {
+            var user = GetUserByEmail(email);
+
+            if (user == null)
+                throw new InvalidOperationException("User Not found by email.");
+            
+            return await UserManager.GetRolesAsync(user.Id);
         }
 
         public bool Owner(string userId)
@@ -78,6 +112,51 @@ namespace OSL.Forum.Web.Services
 
             if (!result.Succeeded)
                 throw new InvalidOperationException("User profile update failed.");
+        }
+
+        public async Task AddUserToRoleAsync(ApplicationUserRole applicationUserRole)
+        {
+            if (applicationUserRole == null)
+                throw new ArgumentNullException(nameof(applicationUserRole));
+
+            await RemoveUserFromRolesAsync(applicationUserRole.UserId);
+
+            var result = await UserManager.AddToRoleAsync(applicationUserRole.UserId, applicationUserRole.UserRole);
+
+            if (!result.Succeeded)
+                throw new InvalidOperationException("Role assign failed.");
+        }
+
+        public List<SelectListItem> GetUserList()
+        {
+            var user = GetUser();
+            var superAdmin = ConfigurationManager.AppSettings["SuperAdminEmail"].ToString();
+
+            var users = UserManager.Users.ToList()
+                .Where(u => u.Email != user.Email && u.Email != superAdmin)
+                .Select(u => new SelectListItem
+                {
+                    Text = u.Email,
+                    Value = u.Id.ToString()
+                }).ToList();
+
+            return users;
+        }
+
+        public async Task RemoveUserFromRolesAsync(string userId)
+        {
+            if (string.IsNullOrWhiteSpace(userId))
+                throw new ArgumentNullException(nameof(userId));
+
+            var userRoles = await UserRolesAsync(userId);
+
+            foreach (var userRole in userRoles)
+            {
+                var result = await UserManager.RemoveFromRolesAsync(userId, userRole);
+
+                if (!result.Succeeded)
+                    throw new InvalidOperationException("Role remove failed.");
+            }
         }
     }
 }

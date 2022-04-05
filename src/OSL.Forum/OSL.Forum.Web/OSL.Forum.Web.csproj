@@ -207,9 +207,11 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\UserManagementController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\ForumController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
+    <Compile Include="Areas\Dashboard\Models\AssignRole\AssignRoleModel.cs" />
     <Compile Include="Areas\Dashboard\Models\Category\CategoriesListModel.cs" />
     <Compile Include="Areas\Dashboard\Models\Category\CreateCategoryModel.cs" />
     <Compile Include="Areas\Dashboard\Models\Category\DeleteCategoryModel.cs" />
@@ -320,6 +322,7 @@
     <Content Include="Areas\Dashboard\Views\Category\Details.cshtml" />
     <Content Include="Areas\Dashboard\Views\Forum\CreateForum.cshtml" />
     <Content Include="Areas\Dashboard\Views\Forum\EditForum.cshtml" />
+    <Content Include="Areas\Dashboard\Views\UserManagement\AssignRole.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

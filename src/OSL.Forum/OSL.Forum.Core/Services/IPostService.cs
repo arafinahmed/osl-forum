@@ -13,5 +13,6 @@ namespace OSL.Forum.Core.Services
         IList<BO.Post> GetPostByUser(string userId);
         IList<BO.Post> GetPendingPosts();
         void ApprovePost(Guid postId);
+        void RejectPost(Guid postId);
     }
 }

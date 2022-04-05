@@ -13,12 +13,12 @@ using System.Web.Mvc;
 namespace OSL.Forum.Web.Areas.Dashboard.Controllers
 {
     [Authorize(Roles = "SuperAdmin, Admin, Moderator")]
-    public class PostController : Controller
+    public class PendingPostController : Controller
     {
-        private static readonly ILog _logger = LogManager.GetLogger(typeof(PostController));
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(PendingPostController));
         private readonly ILifetimeScope _scope;
 
-        public PostController(ILifetimeScope scope)
+        public PendingPostController(ILifetimeScope scope)
         {
             _scope = scope;
         }
@@ -41,9 +41,16 @@ namespace OSL.Forum.Web.Areas.Dashboard.Controllers
             return RedirectToAction("Pending");
         }
 
-        public ActionResult Reject()
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Reject(Guid? id)
         {
-            return RedirectToAction("Pending");
+            if (id == null)
+                return RedirectToAction("Pending", "PendingPost", new { area = "Dashboard"});
+
+            var model = _scope.Resolve<RejectPostModel>();
+            model.Reject(Guid.Parse(id.ToString()));
+
+            return RedirectToAction("Pending", "PendingPost", new { area = "Dashboard" });
         }
     }
 }

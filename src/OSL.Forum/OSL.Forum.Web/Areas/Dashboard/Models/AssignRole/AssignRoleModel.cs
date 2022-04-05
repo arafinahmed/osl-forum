@@ -3,6 +3,7 @@ using AutoMapper;
 using OSL.Forum.Web.Models;
 using OSL.Forum.Web.Seeds;
 using OSL.Forum.Web.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
@@ -13,17 +14,19 @@ namespace OSL.Forum.Web.Areas.Dashboard.Models.AssignRole
     public class AssignRoleModel
     {
         [Required]
-        public string UserId { get; set; }
+        [Display(Name = "Email")]
+        [EmailAddress]
+        public string Email { get; set; }
         [Required]
+        [Display(Name = "Role")]
+
         public string UserRole { get; set; }
-        public List<SelectListItem> ApplicationUserList { get; set; }
         public List<SelectListItem> AdminRoleList { get; set; }
         public List<SelectListItem> SuperAdminRoleList { get; set; }
         private ILifetimeScope _scope;
         private IProfileService _profileService;
         private IMapper _mapper;
 
-        public List<string> Demo = new List<string> { "One", "Two", "Three" };
         public AssignRoleModel()
         {
         }
@@ -40,11 +43,6 @@ namespace OSL.Forum.Web.Areas.Dashboard.Models.AssignRole
             _profileService = _scope.Resolve<IProfileService>();
             _mapper = _scope.Resolve<IMapper>();
             _profileService = _scope.Resolve<IProfileService>();
-        }
-
-        public void GetUsers()
-        {
-            ApplicationUserList = _profileService.GetUserList();
         }
 
         public void SuperAdminRoles()
@@ -81,9 +79,22 @@ namespace OSL.Forum.Web.Areas.Dashboard.Models.AssignRole
 
         public async Task AddUserToRoleAsync()
         {
-            var applicationUserRole = _mapper.Map<ApplicationUserRole>(this);
+            var user = _profileService.GetUserByEmail(Email);
+            if (user == null)
+                throw new InvalidOperationException($"No user found with the email {Email}");
 
-            await _profileService.AddUserToRoleAsync(applicationUserRole);
+            var role = await _profileService.UserRolesByEmailAsync(Email);
+            var assignerRole = await _profileService.UserRolesAsync();
+            if (assignerRole.Contains(Roles.SuperAdmin.ToString()) && UserRole != Roles.SuperAdmin.ToString() && !role.Contains(Roles.SuperAdmin.ToString()))
+            {
+                await _profileService.AddUserToRoleAsync(new ApplicationUserRole { UserId = user.Id, UserRole = UserRole });
+            }
+            else if (assignerRole.Contains(Roles.Admin.ToString()) && UserRole != Roles.Admin.ToString() && UserRole != Roles.SuperAdmin.ToString() && !role.Contains(Roles.Admin.ToString()))
+            {
+                await _profileService.AddUserToRoleAsync(new ApplicationUserRole { UserId = user.Id, UserRole = UserRole });
+            }
+            else
+                throw new InvalidOperationException("You are not permitted to assign role.");
         }
     }
 }

@@ -25,7 +25,6 @@ namespace OSL.Forum.Web.Areas.Dashboard.Controllers
         public ActionResult AssignRole()
         {
             var model = _scope.Resolve<AssignRoleModel>();
-            model.GetUsers();
             model.AdminRoles();
             model.SuperAdminRoles();
             return View(model);
@@ -49,7 +48,8 @@ namespace OSL.Forum.Web.Areas.Dashboard.Controllers
                 ModelState.AddModelError("", ex.Message);
                 _logger.Error("User role assign failed.");
                 _logger.Error(ex.Message);
-
+                model.AdminRoles();
+                model.SuperAdminRoles();
                 return View(model);
             }
         }

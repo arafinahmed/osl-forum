@@ -46,6 +46,16 @@ namespace OSL.Forum.Web.Services
             return user;
         }
 
+        public ApplicationUser GetUserByEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                throw new ArgumentNullException(nameof(email));
+
+            var user = UserManager.FindByEmail(email);
+
+            return user;
+        }
+
         public async Task<IList<string>> UserRolesAsync()
         {
             var userId = UserID();
@@ -56,6 +66,16 @@ namespace OSL.Forum.Web.Services
         public async Task<IList<string>> UserRolesAsync(string userId)
         {
             return await UserManager.GetRolesAsync(userId);
+        }
+
+        public async Task<IList<string>> UserRolesByEmailAsync(string email)
+        {
+            var user = GetUserByEmail(email);
+
+            if (user == null)
+                throw new InvalidOperationException("User Not found by email.");
+            
+            return await UserManager.GetRolesAsync(user.Id);
         }
 
         public bool Owner(string userId)

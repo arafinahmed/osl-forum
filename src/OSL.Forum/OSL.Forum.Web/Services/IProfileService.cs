@@ -19,5 +19,8 @@ namespace OSL.Forum.Web.Services
         Task EditProfileAsync(ApplicationUser applicationUser);
         List<SelectListItem> GetUserList();
         Task AddUserToRoleAsync(ApplicationUserRole applicationUserRole);
+        Task<IList<string>> UserRolesAsync(string userId);
+        ApplicationUser GetUserByEmail(string email);
+        Task<IList<string>> UserRolesByEmailAsync(string email);
     }
 }

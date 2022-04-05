@@ -4,6 +4,7 @@ using OSL.Forum.Core.Profiles;
 using OSL.Forum.Web.Areas.Dashboard.Models.AssignRole;
 using OSL.Forum.Web.Areas.Dashboard.Models.Category;
 using OSL.Forum.Web.Areas.Dashboard.Models.Forum;
+using OSL.Forum.Web.Areas.Dashboard.Models.Post;
 using OSL.Forum.Web.Models.Category;
 using OSL.Forum.Web.Models.FavoriteForum;
 using OSL.Forum.Web.Models.Forum;
@@ -63,7 +64,8 @@ namespace OSL.Forum.Web
             builder.RegisterType<LoadFavForumModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<LoadUserPostModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<EditProfileModel>().AsSelf().InstancePerLifetimeScope();
-            builder.RegisterType<AssignRoleModel>().AsSelf().InstancePerLifetimeScope();            
+            builder.RegisterType<AssignRoleModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<LoadPendingPostsModel>().AsSelf().InstancePerLifetimeScope();
 
             base.Load(builder);
         }

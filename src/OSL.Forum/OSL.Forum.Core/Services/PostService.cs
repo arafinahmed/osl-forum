@@ -8,6 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OSL.Forum.Core.Enums;
 
 namespace OSL.Forum.Core.Services
 {
@@ -78,6 +79,17 @@ namespace OSL.Forum.Core.Services
         public IList<BO.Post> GetPostByUser(string userId)
         {
             var postsEntity = _unitOfWork.Posts.Get(p => p.ApplicationUserId == userId, "");
+
+            var posts = postsEntity.Select(post =>
+                _mapper.Map<BO.Post>(post)
+                ).ToList();
+
+            return posts;
+        }
+
+        public IList<BO.Post> GetPendingPosts()
+        {
+            var postsEntity = _unitOfWork.Posts.Get(p => p.Status == Status.Pending.ToString(), "");
 
             var posts = postsEntity.Select(post =>
                 _mapper.Map<BO.Post>(post)

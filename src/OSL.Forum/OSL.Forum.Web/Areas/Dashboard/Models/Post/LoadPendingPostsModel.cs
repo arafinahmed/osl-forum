@@ -39,10 +39,17 @@ namespace OSL.Forum.Web.Areas.Dashboard.Models.Post
         {
             var roles = await _profileService.UserRolesAsync();
             Posts = new List<BO.Post>();
+            var postList = new List<BO.Post>();
             if (roles.Contains(Roles.Admin.ToString()) || roles.Contains(Roles.SuperAdmin.ToString()) || roles.Contains(Roles.SuperAdmin.ToString()))
             {
-                Posts = _postService.GetPendingPosts();
+                var posts = _postService.GetPendingPosts();
+                foreach (var post in posts)
+                {
+                    post.OwnerName = _profileService.GetUser(post.ApplicationUserId).Name;
+                    postList.Add(post);
+                }
             }
+            Posts = postList;
         }
     }
 }

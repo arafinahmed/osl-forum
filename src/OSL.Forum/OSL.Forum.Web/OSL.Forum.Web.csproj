@@ -207,6 +207,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\PostController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\UserManagementController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\ForumController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\CategoryController.cs" />
@@ -323,6 +324,7 @@
     <Content Include="Areas\Dashboard\Views\Forum\CreateForum.cshtml" />
     <Content Include="Areas\Dashboard\Views\Forum\EditForum.cshtml" />
     <Content Include="Areas\Dashboard\Views\UserManagement\AssignRole.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Post\Pending.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

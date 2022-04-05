@@ -221,6 +221,7 @@
     <Compile Include="Areas\Dashboard\Models\Forum\DeleteForumModel.cs" />
     <Compile Include="Areas\Dashboard\Models\Forum\EditForumModel.cs" />
     <Compile Include="Areas\Dashboard\Models\Forum\CreateForumModel.cs" />
+    <Compile Include="Areas\Dashboard\Models\Post\LoadPendingPostsModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\PostController.cs" />

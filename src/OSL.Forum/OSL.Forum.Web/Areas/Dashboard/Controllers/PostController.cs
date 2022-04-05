@@ -2,6 +2,7 @@
 using log4net;
 using OSL.Forum.Web.Areas.Dashboard.Models.AssignRole;
 using OSL.Forum.Web.Areas.Dashboard.Models.Category;
+using OSL.Forum.Web.Areas.Dashboard.Models.Post;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +23,11 @@ namespace OSL.Forum.Web.Areas.Dashboard.Controllers
             _scope = scope;
         }
 
-        public ActionResult Pending()
+        public async Task<ActionResult> Pending()
         {
-            return View();
+            var model = _scope.Resolve<LoadPendingPostsModel>();
+            await model.Load();
+            return View(model);
         }
     }
 }

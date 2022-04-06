@@ -4,65 +4,123 @@
 }
 
 <div class="container d-flex justify-content-center mt-2">
-
     <div class="col-md-7" style="display:grid; grid-template-columns: repeat(2, 1fr); grid-gap:1rem;">
         @if (Model.FavoriteForums.Count > 0)
         {
-            <div>
-                <div class="card border-primary mb-3" style="max-width: 20rem;">
-                    <div class="card-header bg-primary text-white">
-                        <div class="d-flex justify-content-between">
-                            <h5><a class="text-white" style="text-decoration:none;" href="@Url.Action("FavouriteForums", "Home")">Favorite Forums</a></h5>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <ul>
-                            @{
-                                foreach (var forum in Model.FavoriteForums)
-                                {
-                                    <li class="text-primary">
-                                        <h6>
-                                            <a style="text-decoration:none;" href="@Url.Action("Forum", "Home", new {Area = "", id = forum.ForumId })">@forum.Forum.Name</a>
-                                        </h6>
-                                    </li>
-                                }
-                            }
-                        </ul>
+        <div>
+            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                <div class="card-header bg-primary text-white">
+                    <div class="d-flex justify-content-between">
+                        <h5><a class="text-white" style="text-decoration:none;" href="@Url.Action("FavouriteForums", "Home")">Favorite Forums</a></h5>
                     </div>
                 </div>
+                <div class="card-body">
+                    <ul>
+                        @{
+                                foreach (var forum in Model.FavoriteForums)
+                                {
+                            <li class="text-primary">
+                                <h6>
+                                    <a style="text-decoration:none;" href="@Url.Action("Forum", "Home", new {Area = "", id = forum.ForumId })">@forum.Forum.Name</a>
+                                </h6>
+                            </li>
+                                }
+                        }
+                    </ul>
+                </div>
             </div>
+        </div>
         }
         @foreach (var category in Model.Categories)
         {
-            <div>
-                <div class="card border-primary mb-3" style="max-width: 20rem;">
-                    <div class="card-header bg-primary text-white">
-                        <div class="d-flex justify-content-between">
-                            <h5><a class="text-white" style="text-decoration:none;" href="@Url.Action("Category", "Home", new {Area = "", id = category.Id })">@category.Name</a></h5>
-                        </div>
+        <div>
+            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                <div class="card-header bg-primary text-white">
+                    <div class="d-flex justify-content-between">
+                        <h5><a class="text-white" style="text-decoration:none;" href="@Url.Action("Category", "Home", new {Area = "", id = category.Id })">@category.Name</a></h5>
                     </div>
-                    <div class="card-body">
-                        <ul>
-                            @{
+                </div>
+                <div class="card-body">
+                    <ul>
+                        @{
                                 var i = 0;
                                 foreach (var forum in category.Forums)
                                 {
-                                    <li class="text-primary">
-                                        <h6>
-                                            <a style="text-decoration:none;" href="@Url.Action("Forum", "Home", new {Area = "", id = forum.Id })">@forum.Name</a>
-                                        </h6>
-                                    </li>
+                            <li class="text-primary">
+                                <h6>
+                                    <a style="text-decoration:none;" href="@Url.Action("Forum", "Home", new {Area = "", id = forum.Id })">@forum.Name</a>
+                                </h6>
+                            </li>
                                     i++;
                                     if (i == 4)
                                     {
                                         break;
                                     }
                                 }
-                            }
-                        </ul>
-                    </div>
+                        }
+                    </ul>
                 </div>
             </div>
+        </div>
         }
+    </div>
+</div>
+<div class="container d-flex justify-content-center mt-2">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="Page navigation example">
+                @if (Model.Pager.EndPage > 1)
+                    {
+                <ul class="pagination justify-content-center">
+                    @if (Model.Pager.CurrentPage == 1)
+                        {
+                    <li class="page-item disabled">
+                        <a class="page-link" href="~/Home/Index">First</a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="~/Home/Index?page=@(Model.Pager.CurrentPage - 1)">Previous</a>
+                    </li>
+                        }
+
+                    @if (Model.Pager.CurrentPage > 1)
+                        {
+                    <li class="page-item">
+                        <a class="page-link" href="~/Home/Index">First</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="~/Home/Index?page=@(Model.Pager.CurrentPage - 1)">Previous</a>
+                    </li>
+                        }
+
+                    @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                        {
+                    <li class="@(page == Model.Pager.CurrentPage ? "disabled" : "") page-link">
+                        <a href="~/Home/Index?page=@page">@page</a>
+                    </li>
+                        }
+
+                    @if (Model.Pager.CurrentPage == Model.Pager.TotalPages)
+                        {
+                    <li class="page-item disabled">
+                        <a class="page-link" href="~/Home/Index?page=@(Model.Pager.CurrentPage + 1)">Next</a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="~/Home/Index?page=@(Model.Pager.TotalPages)">Last</a>
+                    </li>
+                        }
+
+                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                        {
+                    <li class="page-item">
+                        <a class="page-link" href="~/Home/Index?page=@(Model.Pager.CurrentPage + 1)">Next</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="~/Home/Index?page=@(Model.Pager.TotalPages)">Last</a>
+                    </li>
+                        }
+                </ul>
+                    }
+            </nav>
+        </div>
     </div>
 </div>

@@ -11,5 +11,6 @@ namespace OSL.Forum.Core.Services
         BO.Category GetCategory(Guid categoryId);
         void EditCategory(BO.Category category);
         void Delete(Guid categoryId);
+        (IList<BO.Category> categories, int totalCount) GetCategories(int pageSize, int pageIndex);
     }
 }

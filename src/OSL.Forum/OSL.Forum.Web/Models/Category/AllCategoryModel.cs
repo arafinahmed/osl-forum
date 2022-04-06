@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using OSL.Forum.Core.Services;
+using OSL.Forum.Core.Utilities;
 using OSL.Forum.Web.Services;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace OSL.Forum.Web.Models.Category
 {
     public class AllCategoryModel
     {
+        public Pager Pager { get; set; }
         public IList<BO.Category> Categories;
         public IList<BO.FavoriteForum> FavoriteForums { get; set; }
         private ILifetimeScope _scope;
@@ -34,15 +36,20 @@ namespace OSL.Forum.Web.Models.Category
             _favoriteForumService = _scope.Resolve<IFavoriteForumService>();
         }
 
-        public void GetCategories()
+        public void GetCategories(int? page)
         {
-            Categories = _categoryService.GetCategories();
+            var pageIndex = page ?? 1;
+            var res = _categoryService.GetCategories(10, pageIndex);
+            Categories = res.categories;
+            var count = res.totalCount;
             FavoriteForums = new List<BO.FavoriteForum>();
             var user = _profileService.GetUser();
+            Pager = new Pager(count, page);
             if(user != null)
             {
                 FavoriteForums = _favoriteForumService.GetUserFavoriteForums(user.Id).Take(4).ToList();
             }
+            
             
         }
     }

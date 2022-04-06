@@ -140,6 +140,7 @@
     <Compile Include="UnitOfWorks\CoreUnitOfWork.cs" />
     <Compile Include="Utilities\DateTimeUtility.cs" />
     <Compile Include="Utilities\IDateTimeUtility.cs" />
+    <Compile Include="Utilities\Pager.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202203230909516_categorytable.resx">

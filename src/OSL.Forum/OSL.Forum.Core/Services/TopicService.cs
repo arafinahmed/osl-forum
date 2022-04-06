@@ -80,5 +80,19 @@ namespace OSL.Forum.Core.Services
 
             return topic;
         }
+
+        public void AutoApprovalOn(Guid topicId)
+        {
+            if (topicId == Guid.Empty)
+                throw new ArgumentNullException(nameof(topicId));
+
+            var topicEntity = _unitOfWork.Topics.GetDynamic(t => t.Id == topicId, null, "", false).FirstOrDefault();
+
+            if (topicEntity == null)
+                throw new InvalidOperationException("No topic found with the topic id");
+
+            topicEntity.ApprovalType = ApprovalType.Auto.ToString();
+            _unitOfWork.Save();
+        }
     }
 }

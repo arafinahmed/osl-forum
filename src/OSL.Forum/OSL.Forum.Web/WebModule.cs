@@ -68,6 +68,7 @@ namespace OSL.Forum.Web
             builder.RegisterType<LoadPendingPostsModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<ApprovePostModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<RejectPostModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<PostActionModel>().AsSelf().InstancePerLifetimeScope();
 
             base.Load(builder);
         }

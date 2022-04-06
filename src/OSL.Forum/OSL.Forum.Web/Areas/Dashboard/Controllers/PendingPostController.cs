@@ -52,5 +52,45 @@ namespace OSL.Forum.Web.Areas.Dashboard.Controllers
 
             return RedirectToAction("Pending", "PendingPost", new { area = "Dashboard" });
         }
+
+        public ActionResult Post(Guid? id)
+        {
+            if (id == null)
+                return RedirectToAction("Index", "Category", new { area = "Dashboard" });
+
+            try
+            {
+                var model = _scope.Resolve<PostActionModel>();
+                model.Load(Guid.Parse(id.ToString()));
+                return View(model);
+            }
+            catch
+            {
+                return RedirectToAction("Index", "Category", new { area = "Dashboard" });
+            }
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult PostAction(string button, PostActionModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                if (model.Post.Id != null)
+                    return RedirectToAction("Post", "PendingPost", new { area = "Dashboard", id = model.Post.Id });
+                else
+                    return RedirectToAction("Index", "Category", new { area = "Dashboard" });
+            }
+
+            model.Resolve(_scope);
+            try
+            {
+                model.StatusUpdate(button);
+                return RedirectToAction("Pending", "PendingPost", new { area = "Dashboard" });
+            }
+            catch
+            {
+                return RedirectToAction("Index", "Category", new { area = "Dashboard" });
+            }
+        }
     }
 }

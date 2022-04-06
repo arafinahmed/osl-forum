@@ -20,7 +20,7 @@
                     <div class="card">
                         <div class="card-header bg-primary ">
                             <div class="d-flex justify-content-between">
-                                <h5 class="text-bold">@post.Name</h5>
+                                <a href="@Url.Action("Post", "PendingPost", new {id = @post.Id})"><h5 class="text-bold">@post.Name</h5></a>
                                 <div class="text-white">
                                     @if (User.Identity.IsAuthenticated &&
                                     (User.IsInRole("SuperAdmin") ||

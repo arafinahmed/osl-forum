@@ -94,6 +94,15 @@ namespace OSL.Forum.Web.Models.Post
                 throw new InvalidOperationException("No user found");
 
             var time = _dateTimeUtility.Now;
+            var topic = _topicService.GetTopic(TopicId);
+            var status = Status.Pending.ToString();
+            
+            if (topic == null)
+                throw new Exception("No topic found");
+
+            if (topic.ApprovalType == ApprovalType.Auto.ToString())
+                status = Status.Approved.ToString();
+
             var post = new BO.Post
             {
                 Name = Name,
@@ -102,7 +111,7 @@ namespace OSL.Forum.Web.Models.Post
                 ModificationDate = time,
                 ApplicationUserId = user.Id,
                 TopicId = TopicId,
-                Status = Status.Pending.ToString()
+                Status = status
             };
 
             _postService.CreatePost(post);

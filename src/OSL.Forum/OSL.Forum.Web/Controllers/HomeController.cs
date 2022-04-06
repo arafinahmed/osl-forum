@@ -21,10 +21,10 @@ namespace OSL.Forum.Web.Controllers
         {
             _scope = scope;
         }
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             var model = _scope.Resolve<AllCategoryModel>();
-            model.GetCategories();
+            model.GetCategories(page);
             return View(model);
         }
 

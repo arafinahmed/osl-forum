@@ -57,6 +57,28 @@ namespace OSL.Forum.Core.Services
             return categories;
         }
 
+        public (IList<BO.Category> categories, int totalCount) GetCategories(int pageSize, int pageIndex)
+        {
+            var categoryEntities = _unitOfWork.Categories.Get(null, q => q.OrderByDescending(c => c.ModificationDate), "Forums", pageIndex, pageSize, false);
+
+            var categoryList = from c in categoryEntities.data
+                               orderby c.ModificationDate descending
+                               select c;
+
+            var categories = new List<BO.Category>();
+
+            foreach (var entity in categoryList)
+            {
+                entity.Forums = entity.Forums.OrderByDescending(c => c.ModificationDate).Take(4).ToList();
+                var category = _mapper.Map<BO.Category>(entity);
+                categories.Add(category);
+            }
+
+            var count = _unitOfWork.Categories.GetCount();
+
+            return (categories, count);
+        }
+
         public BO.Category GetCategory(Guid categoryId)
         {
             if (categoryId == Guid.Empty)

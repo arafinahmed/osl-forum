@@ -17,15 +17,18 @@ namespace OSL.Forum.Web.Models.Category
         private ICategoryService _categoryService;
         private IFavoriteForumService _favoriteForumService;
         private IProfileService _profileService;
+        private IForumService _forumService;
         public AllCategoryModel()
         {
         }
 
-        public AllCategoryModel(ICategoryService categoryService, IFavoriteForumService favoriteForumService, IProfileService profileService)
+        public AllCategoryModel(ICategoryService categoryService, IFavoriteForumService favoriteForumService, IProfileService profileService,
+            IForumService forumService)
         {
             _categoryService = categoryService;
             _favoriteForumService = favoriteForumService;
             _profileService = profileService;
+            _forumService = forumService;
         }
 
         public void Resolve(ILifetimeScope scope)
@@ -34,6 +37,7 @@ namespace OSL.Forum.Web.Models.Category
             _categoryService = _scope.Resolve<ICategoryService>();
             _profileService = _scope.Resolve<IProfileService>();
             _favoriteForumService = _scope.Resolve<IFavoriteForumService>();
+            _forumService = _scope.Resolve<IForumService>();
         }
 
         public void GetCategories(int? page)
@@ -49,8 +53,10 @@ namespace OSL.Forum.Web.Models.Category
             {
                 FavoriteForums = _favoriteForumService.GetUserFavoriteForums(user.Id).Take(4).ToList();
             }
-            
-            
+            foreach(var forum in FavoriteForums)
+            {
+                forum.Forum = _forumService.GetForum(forum.ForumId);
+            }
         }
     }
 }

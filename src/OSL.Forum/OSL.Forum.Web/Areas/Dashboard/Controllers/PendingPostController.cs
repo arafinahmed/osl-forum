@@ -23,10 +23,13 @@ namespace OSL.Forum.Web.Areas.Dashboard.Controllers
             _scope = scope;
         }
 
-        public async Task<ActionResult> Pending()
+        public async Task<ActionResult> Pending(int? page)
         {
+            page = page ?? 1;
+            if (page < 1)
+                page = 1;
             var model = _scope.Resolve<LoadPendingPostsModel>();
-            await model.Load();
+            await model.Load(page);
             return View(model);
         }
 

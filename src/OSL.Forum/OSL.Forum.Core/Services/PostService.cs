@@ -112,6 +112,17 @@ namespace OSL.Forum.Core.Services
             return posts;
         }
 
+        public (IList<BO.Post> posts, int totalCount) GetPendingPosts(int pageSize, int pageIndex)
+        {
+            var postsEntity = _unitOfWork.Posts.Get(p => p.Status == Status.Pending.ToString(), q => q.OrderBy(c => c.ModificationDate), "", pageIndex, pageSize, true);
+            var count = _unitOfWork.Posts.GetCount(p => p.Status == Status.Pending.ToString());
+
+            var posts = postsEntity.data.Select(post =>
+                _mapper.Map<BO.Post>(post)
+                ).ToList();
+            return (posts, count);
+        }
+
         public void ApprovePost(Guid postId)
         {
             if (postId == null)

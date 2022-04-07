@@ -7,6 +7,7 @@ using OSL.Forum.Web.Models.Topic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -181,6 +182,21 @@ namespace OSL.Forum.Web.Controllers
             var model = _scope.Resolve<LoadFavForumModel>();
             model.Load();
             return View(model);
+        }
+
+        [Authorize, HttpPost, ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteTopic(Guid id)
+        {
+            try
+            {
+                var model = _scope.Resolve<DeleteTopicModel>();
+                var forumId = await model.DeleteTopic(id);
+                return RedirectToAction("Forum", "Home", new { id = forumId });
+            }
+            catch
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
     }
 }

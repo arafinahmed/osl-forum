@@ -252,6 +252,7 @@
     <Compile Include="Models\Post\LoadUserPostModel.cs" />
     <Compile Include="Models\Post\ReplyPostModel.cs" />
     <Compile Include="Models\Profile\EditProfileModel.cs" />
+    <Compile Include="Models\Topic\DeleteTopicModel.cs" />
     <Compile Include="Models\Topic\NewTopicModel.cs" />
     <Compile Include="Models\Topic\TopicDetailsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

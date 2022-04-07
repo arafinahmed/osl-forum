@@ -68,12 +68,19 @@ namespace OSL.Forum.Web.Controllers
         public async Task<ActionResult> Delete(Guid id)
         {
             var model = _scope.Resolve<DeletePostModel>();
-            await model.Delete(id);
-            
-            if(model.TopicId == Guid.Empty)
+            try
+            {
+                await model.Delete(id);
+                if (model.TopicId == Guid.Empty)
+                    return RedirectToAction("Index", "Home");
+            }
+            catch
+            {
                 return RedirectToAction("Index", "Home");
-
+            }
             return RedirectToAction("TopicDetails", "Home", new { id = model.TopicId });
+            
+
         }
 
         [Authorize]
@@ -118,12 +125,18 @@ namespace OSL.Forum.Web.Controllers
         [Authorize, HttpPost, ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteFromProfile(Guid id)
         {
-            var model = _scope.Resolve<DeletePostModel>();
-            await model.Delete(id);
+            try
+            {
+                var model = _scope.Resolve<DeletePostModel>();
+                await model.Delete(id);
 
-            if (model.TopicId == Guid.Empty)
+                if (model.TopicId == Guid.Empty)
+                    return RedirectToAction("Index", "Home");
+            }
+            catch
+            {
                 return RedirectToAction("Index", "Home");
-
+            }
             return RedirectToAction("Me", "Profile");
         }
     }

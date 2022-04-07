@@ -94,5 +94,14 @@ namespace OSL.Forum.Core.Services
             topicEntity.ApprovalType = ApprovalType.Auto.ToString();
             _unitOfWork.Save();
         }
+
+        public void DeleteTopic(Guid topicId)
+        {
+            if (topicId == Guid.Empty)
+                throw new ArgumentNullException("No topic id is provided.");
+
+            _unitOfWork.Topics.Remove(topicId);
+            _unitOfWork.Save();
+        }
     }
 }

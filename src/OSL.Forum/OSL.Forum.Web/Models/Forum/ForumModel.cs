@@ -71,6 +71,11 @@ namespace OSL.Forum.Web.Models.Forum
                 IsFavourite = _favoriteForumService.IsFavourite(forumId, user.Id);
 
             CategoryName = category.Name;
+
+            foreach(var topic in Topics)
+            {
+                topic.Owner = _profileService.Owner(topic.ApplicationUserId);
+            }
         }
     }
 }

@@ -69,6 +69,7 @@ namespace OSL.Forum.Web
             builder.RegisterType<ApprovePostModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<RejectPostModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<PostActionModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<DeleteTopicModel>().AsSelf().InstancePerLifetimeScope();
 
             base.Load(builder);
         }

@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using AutoMapper;
 using OSL.Forum.Core.Services;
+using OSL.Forum.Core.Utilities;
 using System.Collections.Generic;
 using BO = OSL.Forum.Core.BusinessObjects;
 
@@ -8,6 +9,7 @@ namespace OSL.Forum.Web.Areas.Dashboard.Models.Category
 {
     public class CategoriesListModel
     {
+        public Pager Pager { get; set; }
         public IList<BO.Category> Categories;
         private ILifetimeScope _scope;
         private ICategoryService _categoryService;
@@ -26,9 +28,11 @@ namespace OSL.Forum.Web.Areas.Dashboard.Models.Category
             _categoryService = _scope.Resolve<ICategoryService>();
         }
 
-        public void GetCategories()
+        public void GetCategories(int? page)
         {
-            Categories = _categoryService.GetCategories();
+            var res = _categoryService.GetCategories(10, page ?? 1);
+            Pager = new Pager(res.totalCount, page ?? 1);
+            Categories = res.categories;
         }
     }
 }

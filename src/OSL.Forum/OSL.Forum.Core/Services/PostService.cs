@@ -90,7 +90,7 @@ namespace OSL.Forum.Core.Services
 
         public (IList<BO.Post> Posts, int totalCount) GetPostByUser(string userId, int pageSize, int pageIndex)
         {
-            var postsEntity = _unitOfWork.Posts.Get(p => p.ApplicationUserId == userId, q => q.OrderByDescending(c => c.ModificationDate), "", pageIndex, pageSize, false);
+            var postsEntity = _unitOfWork.Posts.Get(p => p.ApplicationUserId == userId && (p.Status == Status.Approved.ToString() || p.Status == Status.Pending.ToString()), q => q.OrderByDescending(c => c.ModificationDate), "", pageIndex, pageSize, false);
 
             var posts = postsEntity.data.Select(post =>
                 _mapper.Map<BO.Post>(post)
@@ -110,6 +110,17 @@ namespace OSL.Forum.Core.Services
                 ).ToList();
 
             return posts;
+        }
+
+        public (IList<BO.Post> posts, int totalCount) GetPendingPosts(int pageSize, int pageIndex)
+        {
+            var postsEntity = _unitOfWork.Posts.Get(p => p.Status == Status.Pending.ToString(), q => q.OrderBy(c => c.ModificationDate), "", pageIndex, pageSize, true);
+            var count = _unitOfWork.Posts.GetCount(p => p.Status == Status.Pending.ToString());
+
+            var posts = postsEntity.data.Select(post =>
+                _mapper.Map<BO.Post>(post)
+                ).ToList();
+            return (posts, count);
         }
 
         public void ApprovePost(Guid postId)

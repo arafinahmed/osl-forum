@@ -90,7 +90,12 @@ namespace OSL.Forum.Web.Models.Post
         public void Edit()
         {
             var postBO = _postService.GetPost(Id);
-            
+
+            if (postBO == null)
+                throw new NullReferenceException("Post not found with the post id");
+
+            var topic = _topicService.GetTopic(postBO.TopicId);
+
             if (postBO == null)
                 throw new NullReferenceException("Post not found with the post id");
 
@@ -100,7 +105,7 @@ namespace OSL.Forum.Web.Models.Post
                 throw new InvalidOperationException("You are not permitted to edit.");
 
             var status = Status.Pending.ToString();
-            if (postBO.Topic.ApprovalType == ApprovalType.Auto.ToString())
+            if (topic.ApprovalType == ApprovalType.Auto.ToString())
                 status = Status.Approved.ToString();
 
             var post = new BO.Post

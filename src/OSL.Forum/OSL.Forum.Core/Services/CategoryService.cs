@@ -40,7 +40,7 @@ namespace OSL.Forum.Core.Services
 
         public IList<BO.Category> GetCategories()
         {
-            var categoryEntities = _unitOfWork.Categories.Get(null, "");
+            var categoryEntities = _unitOfWork.Categories.Get(null, "Forums");
 
             var categoryList = from c in categoryEntities
                                orderby c.ModificationDate descending

@@ -14,18 +14,26 @@ namespace OSL.Forum.Web.Areas.Dashboard.Models.Post
     public class LoadPendingPostsModel
     {
         public IList<BO.Post> Posts { get; set; }
+        public BO.Topic Topic { get; set; }
         private IPostService _postService;
         private IProfileService _profileService;
+        private ITopicService _topicService;
+        private IForumService _forumService;
+        private ICategoryService _categoryService;
         private ILifetimeScope _scope;
 
         public LoadPendingPostsModel()
         {
         }
 
-        public LoadPendingPostsModel(IPostService postService, IProfileService profileService)
+        public LoadPendingPostsModel(IPostService postService, IProfileService profileService, ITopicService topicService,
+            IForumService forumService, ICategoryService categoryService)
         {
             _postService = postService;
             _profileService = profileService;
+            _topicService = topicService;
+            _categoryService = categoryService;
+            _forumService = forumService;
         }
 
         public void Resolve(ILifetimeScope scope)
@@ -33,6 +41,9 @@ namespace OSL.Forum.Web.Areas.Dashboard.Models.Post
             _scope = scope;
             _postService = _scope.Resolve<IPostService>();
             _profileService = _scope.Resolve<IProfileService>();
+            _topicService = _scope.Resolve<ITopicService>();
+            _forumService = _scope.Resolve<IForumService>();
+            _categoryService = _scope.Resolve<ICategoryService>();
         }
 
         public async Task Load()
@@ -50,6 +61,14 @@ namespace OSL.Forum.Web.Areas.Dashboard.Models.Post
                 }
             }
             Posts = postList;
+
+            foreach(var post in Posts)
+            {
+                post.Topic = _topicService.GetTopic(post.TopicId);
+                post.Topic.Forum = _forumService.GetForum(post.Topic.ForumId);
+                post.Topic.Forum.Category = _categoryService.GetCategory(post.Topic.Forum.CategoryId);
+            }
+            
         }
     }
 }

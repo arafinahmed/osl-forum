@@ -21,10 +21,13 @@ namespace OSL.Forum.Web.Areas.Dashboard.Controllers
         }
 
         // GET: Dashboard/Category
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
+            page = page ?? 1;
+            if (page < 1)
+                page = 1;
             var model = _scope.Resolve<CategoriesListModel>();
-            model.GetCategories();
+            model.GetCategories(page);
             return View(model);
         }
 

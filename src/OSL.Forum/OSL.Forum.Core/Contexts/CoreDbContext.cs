@@ -12,11 +12,12 @@ namespace OSL.Forum.Core.Contexts
     {
         public CoreDbContext() : base("DefaultConnection")
         {
-
+            Configuration.LazyLoadingEnabled = false;
         }
 
         public CoreDbContext(string connectionString) : base(connectionString)
         {
+            Configuration.LazyLoadingEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

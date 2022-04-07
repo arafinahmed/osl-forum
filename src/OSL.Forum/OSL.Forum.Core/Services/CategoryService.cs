@@ -59,7 +59,7 @@ namespace OSL.Forum.Core.Services
 
         public (IList<BO.Category> categories, int totalCount) GetCategories(int pageSize, int pageIndex)
         {
-            var categoryEntities = _unitOfWork.Categories.Get(null, q => q.OrderByDescending(c => c.ModificationDate), "Forums", pageIndex, pageSize, false);
+            var categoryEntities = _unitOfWork.Categories.Get(null, q => q.OrderByDescending(c => c.ModificationDate), "Forums", pageIndex, pageSize, true);
 
             var categoryList = from c in categoryEntities.data
                                orderby c.ModificationDate descending
@@ -85,11 +85,12 @@ namespace OSL.Forum.Core.Services
                 throw new ArgumentNullException("No category found with the category id.");
 
             var categoryEntity = _unitOfWork.Categories.GetById(categoryId);
+            var forums = _unitOfWork.Forums.Get(x => x.CategoryId == categoryId, "");
 
             if (categoryEntity == null)
                 return null;
 
-            categoryEntity.Forums = categoryEntity.Forums.OrderByDescending(c => c.ModificationDate).ToList();
+            categoryEntity.Forums = forums.OrderByDescending(c => c.ModificationDate).ToList();
             var category = _mapper.Map<BO.Category>(categoryEntity);
 
             return category;

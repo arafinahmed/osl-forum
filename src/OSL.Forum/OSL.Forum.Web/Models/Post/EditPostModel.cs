@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using AutoMapper;
+using OSL.Forum.Core.Enums;
 using OSL.Forum.Core.Services;
 using OSL.Forum.Core.Utilities;
 using OSL.Forum.Web.Services;
@@ -98,12 +99,17 @@ namespace OSL.Forum.Web.Models.Post
             if (!Owner)
                 throw new InvalidOperationException("You are not permitted to edit.");
 
+            var status = Status.Pending.ToString();
+            if (postBO.Topic.ApprovalType == ApprovalType.Auto.ToString())
+                status = Status.Approved.ToString();
+
             var post = new BO.Post
             {
                 Id = Id,
                 Name = Name,
                 Description = Description,
-                ModificationDate = _dateTimeUtility.Now
+                ModificationDate = _dateTimeUtility.Now,
+                Status = status
             };
             
             _postService.EditPost(post);

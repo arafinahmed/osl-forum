@@ -15,5 +15,6 @@ namespace OSL.Forum.Core.BusinessObjects
         public string Status { get; set; }
         public bool Owner { get; set; }
         public string OwnerName { get; set; }
+        public string TimeStampText { get; set; }
     }
 }

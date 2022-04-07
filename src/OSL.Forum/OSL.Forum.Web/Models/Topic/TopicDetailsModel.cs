@@ -68,6 +68,13 @@ namespace OSL.Forum.Web.Models.Topic
                 postList.Add(topicPost);                
             }
             Topic.Posts = postList;
+            
+            foreach (var post in Topic.Posts)
+            {
+                post.TimeStampText = post.CreationDate.ToShortDateString() + " at " + post.CreationDate.ToShortTimeString();
+                if (post.CreationDate != post.ModificationDate)
+                    post.TimeStampText = post.ModificationDate.ToShortDateString() + " at " + post.ModificationDate.ToShortTimeString() + " [Modified]";
+            }
         }
     }
 }

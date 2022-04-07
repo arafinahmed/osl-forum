@@ -90,7 +90,7 @@ namespace OSL.Forum.Core.Services
 
         public (IList<BO.Post> Posts, int totalCount) GetPostByUser(string userId, int pageSize, int pageIndex)
         {
-            var postsEntity = _unitOfWork.Posts.Get(p => p.ApplicationUserId == userId, q => q.OrderByDescending(c => c.ModificationDate), "", pageIndex, pageSize, false);
+            var postsEntity = _unitOfWork.Posts.Get(p => p.ApplicationUserId == userId && (p.Status == Status.Approved.ToString() || p.Status == Status.Pending.ToString()), q => q.OrderByDescending(c => c.ModificationDate), "", pageIndex, pageSize, false);
 
             var posts = postsEntity.data.Select(post =>
                 _mapper.Map<BO.Post>(post)

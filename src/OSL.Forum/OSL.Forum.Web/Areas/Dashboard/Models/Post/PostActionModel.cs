@@ -14,16 +14,21 @@ namespace OSL.Forum.Web.Areas.Dashboard.Models.Post
         private ILifetimeScope _scope;
         private IProfileService _profileService;
         private ITopicService _topicService;
+        private IForumService _forumService;
+        private ICategoryService _categoryService;
 
         public PostActionModel()
         {
         }
 
-        public PostActionModel(IPostService postService, IProfileService profileService, ITopicService topicService)
+        public PostActionModel(IPostService postService, IProfileService profileService, ITopicService topicService, IForumService forumService,
+            ICategoryService categoryService)
         {
             _postService = postService;
             _profileService = profileService;
             _topicService = topicService;
+            _forumService = forumService;
+            _categoryService = categoryService;
         }
 
         public void Resolve(ILifetimeScope scope)
@@ -32,6 +37,8 @@ namespace OSL.Forum.Web.Areas.Dashboard.Models.Post
             _postService = _scope.Resolve<IPostService>();
             _profileService = _scope.Resolve<IProfileService>();
             _topicService = _scope.Resolve<ITopicService>();
+            _forumService = _scope.Resolve<IForumService>();
+            _categoryService = _scope.Resolve<ICategoryService>();
         }
 
         public void Load(Guid postId)
@@ -43,6 +50,10 @@ namespace OSL.Forum.Web.Areas.Dashboard.Models.Post
 
             if (Post == null)
                 throw new InvalidOperationException("Post not found");
+
+            Post.Topic = _topicService.GetTopic(Post.TopicId);
+            Post.Topic.Forum = _forumService.GetForum(Post.Topic.ForumId);
+            Post.Topic.Forum.Category = _categoryService.GetCategory(Post.Topic.Forum.CategoryId);
 
             Post.OwnerName = _profileService.GetUser(Post.ApplicationUserId).Name;
         }

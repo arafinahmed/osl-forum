@@ -46,6 +46,13 @@ namespace OSL.Forum.Web.Models.Post
                 Pager = new Pager(res.totalCount, page ?? 1, 10);
                 Posts = res.Posts;
             }
+
+            foreach(var post in Posts)
+            {
+                post.TimeStampText = post.CreationDate.ToShortDateString() + " at " + post.CreationDate.ToShortTimeString();
+                if(post.CreationDate != post.ModificationDate)
+                    post.TimeStampText = post.ModificationDate.ToShortDateString() + " at " + post.ModificationDate.ToShortTimeString() + " [Modified]";
+            }
         }
     }
 }

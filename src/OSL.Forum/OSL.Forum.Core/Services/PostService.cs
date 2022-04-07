@@ -63,6 +63,7 @@ namespace OSL.Forum.Core.Services
             postEntity.Name = post.Name;
             postEntity.Description = post.Description;
             postEntity.ModificationDate = post.ModificationDate;
+            postEntity.Status = post.Status;
 
             _unitOfWork.Save();
         }

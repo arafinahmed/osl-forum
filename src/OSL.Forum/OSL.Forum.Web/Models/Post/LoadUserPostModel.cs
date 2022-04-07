@@ -35,14 +35,16 @@ namespace OSL.Forum.Web.Models.Post
             _profileService = _scope.Resolve<IProfileService>();
         }
 
-        public void Load()
+        public void Load(int? page)
         {
-            Pager = new Pager(25, 1);
+            
             ApplicationUser = _profileService.GetUser();
             Posts = new List<BO.Post>();
             if (ApplicationUser != null)
             {
-                Posts = _postService.GetPostByUser(ApplicationUser.Id);
+                var res  = _postService.GetPostByUser(ApplicationUser.Id, 10, page ?? 1);
+                Pager = new Pager(res.totalCount, page ?? 1, 10);
+                Posts = res.Posts;
             }
         }
     }

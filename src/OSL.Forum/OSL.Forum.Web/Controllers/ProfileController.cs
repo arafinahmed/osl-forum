@@ -25,15 +25,20 @@ namespace OSL.Forum.Web.Controllers
             _scope = scope;
         }
 
-        public ActionResult Me()
+        public ActionResult Me(int? page)
         {
+            page = page ?? 1;
+            
+            if (page < 1)
+                page = 1;
+
             if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home");
             }
 
             var model = _scope.Resolve<LoadUserPostModel>();
-            model.Load();
+            model.Load(page);
             return View(model);
         }
 

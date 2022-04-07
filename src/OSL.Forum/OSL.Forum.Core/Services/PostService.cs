@@ -87,6 +87,19 @@ namespace OSL.Forum.Core.Services
             return posts;
         }
 
+        public (IList<BO.Post> Posts, int totalCount) GetPostByUser(string userId, int pageSize, int pageIndex)
+        {
+            var postsEntity = _unitOfWork.Posts.Get(p => p.ApplicationUserId == userId, q => q.OrderByDescending(c => c.ModificationDate), "", pageIndex, pageSize, false);
+
+            var posts = postsEntity.data.Select(post =>
+                _mapper.Map<BO.Post>(post)
+                ).ToList();
+
+            var totalCount = _unitOfWork.Posts.GetCount(p => p.ApplicationUserId == userId);
+
+            return (posts, totalCount);
+        }
+
         public IList<BO.Post> GetPendingPosts()
         {
             var postsEntity = _unitOfWork.Posts.Get(p => p.Status == Status.Pending.ToString(), "");

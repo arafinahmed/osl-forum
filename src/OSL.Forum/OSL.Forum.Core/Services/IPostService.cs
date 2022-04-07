@@ -14,5 +14,6 @@ namespace OSL.Forum.Core.Services
         IList<BO.Post> GetPendingPosts();
         void ApprovePost(Guid postId);
         void RejectPost(Guid postId);
+        (IList<BO.Post> Posts, int totalCount) GetPostByUser(string userId, int pageSize, int pageIndex);
     }
 }

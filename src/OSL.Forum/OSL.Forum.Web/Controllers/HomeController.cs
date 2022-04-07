@@ -23,6 +23,10 @@ namespace OSL.Forum.Web.Controllers
         }
         public ActionResult Index(int? page)
         {
+            page = page ?? 1;
+            if (page < 1)
+                page = 1;
+
             var model = _scope.Resolve<AllCategoryModel>();
             model.GetCategories(page);
             return View(model);

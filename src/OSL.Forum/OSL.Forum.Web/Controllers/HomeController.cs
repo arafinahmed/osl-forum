@@ -198,5 +198,20 @@ namespace OSL.Forum.Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+
+        [Authorize, HttpPost, ValidateAntiForgeryToken]
+        public async Task<ActionResult> CloseTopic(Guid id)
+        {
+            try
+            {
+                var model = _scope.Resolve<DeleteTopicModel>();
+                var forumId = await model.DeleteTopic(id);
+                return RedirectToAction("Forum", "Home", new { id = forumId });
+            }
+            catch
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
     }
 }

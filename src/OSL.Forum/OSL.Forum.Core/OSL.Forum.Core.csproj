@@ -96,6 +96,7 @@
     <Compile Include="Entities\Post.cs" />
     <Compile Include="Entities\Topic.cs" />
     <Compile Include="Enums\ApprovalType.cs" />
+    <Compile Include="Enums\TopicStatus.cs" />
     <Compile Include="Enums\Status.cs" />
     <Compile Include="Migrations\202203230909516_categorytable.cs" />
     <Compile Include="Migrations\202203230909516_categorytable.Designer.cs">

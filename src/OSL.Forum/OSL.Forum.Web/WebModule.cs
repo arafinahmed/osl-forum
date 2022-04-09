@@ -70,7 +70,7 @@ namespace OSL.Forum.Web
             builder.RegisterType<RejectPostModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<PostActionModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<DeleteTopicModel>().AsSelf().InstancePerLifetimeScope();
-            builder.RegisterType<CloseTopicModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<ChangeTopicStatusModel>().AsSelf().InstancePerLifetimeScope();
 
             base.Load(builder);
         }

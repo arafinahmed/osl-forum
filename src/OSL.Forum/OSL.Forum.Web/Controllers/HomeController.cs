@@ -204,7 +204,7 @@ namespace OSL.Forum.Web.Controllers
         {
             try
             {
-                var model = _scope.Resolve<CloseTopicModel>();
+                var model = _scope.Resolve<ChangeTopicStatusModel>();
                 var forumId = await model.CloseTopic(id);
                 return RedirectToAction("Forum", "Home", new { id = forumId });
             }

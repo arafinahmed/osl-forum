@@ -12,17 +12,17 @@ using System.Web;
 
 namespace OSL.Forum.Web.Models.Topic
 {
-    public class CloseTopicModel
+    public class ChangeTopicStatusModel
     {
         private ITopicService _topicService;
         private ILifetimeScope _scope;
         private IProfileService _profileService;
 
-        public CloseTopicModel()
+        public ChangeTopicStatusModel()
         {
         }
 
-        public CloseTopicModel(ITopicService topicService, IProfileService profileService)
+        public ChangeTopicStatusModel(ITopicService topicService, IProfileService profileService)
         {
             _topicService = topicService;
             _profileService = profileService;

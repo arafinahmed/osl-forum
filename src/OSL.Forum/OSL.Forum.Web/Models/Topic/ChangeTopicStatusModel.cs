@@ -35,7 +35,7 @@ namespace OSL.Forum.Web.Models.Topic
             _profileService = _scope.Resolve<IProfileService>();
         }
 
-        public async Task<Guid> CloseTopic(Guid id)
+        public async Task<Guid> ChangeTopic(Guid id, TopicStatus status)
         {
             if (id == Guid.Empty)
                 throw new ArgumentNullException("No id is provided to delete topic.");
@@ -51,7 +51,7 @@ namespace OSL.Forum.Web.Models.Topic
             var owner = _profileService.Owner(topic.ApplicationUserId);
             if (owner)
             {
-                _topicService.ChangeTopicStatus(id, TopicStatus.Closed);
+                _topicService.ChangeTopicStatus(id, status);
                 return topic.ForumId;
             }
             else
@@ -59,7 +59,7 @@ namespace OSL.Forum.Web.Models.Topic
                 var roles = await _profileService.UserRolesAsync();
                 if(roles.Contains(Roles.SuperAdmin.ToString()) || roles.Contains(Roles.SuperAdmin.ToString()) || roles.Contains(Roles.SuperAdmin.ToString()))
                 {
-                    _topicService.ChangeTopicStatus(id, TopicStatus.Closed);
+                    _topicService.ChangeTopicStatus(id, status);
                     return topic.ForumId;
                 }
             }

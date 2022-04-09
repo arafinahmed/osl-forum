@@ -103,5 +103,19 @@ namespace OSL.Forum.Core.Services
             _unitOfWork.Topics.Remove(topicId);
             _unitOfWork.Save();
         }
+
+        public void CloseTopic(Guid topicId)
+        {
+            if (topicId == Guid.Empty)
+                throw new ArgumentNullException("No topic id is provided.");
+
+            var topicEntity = _unitOfWork.Topics.GetById(topicId);
+            
+            if (topicEntity == null)
+                throw new InvalidOperationException("No topic found with the provided topic id.");
+
+            topicEntity.Status = TopicStatus.Closed.ToString();
+            _unitOfWork.Save();
+        }
     }
 }

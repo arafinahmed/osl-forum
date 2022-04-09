@@ -116,8 +116,8 @@ namespace OSL.Forum.Web.Controllers
             }
             catch (Exception ex)
             {
-                _logger.Error("Invalid attempt in url.");
                 _logger.Error(ex.Message);
+                ModelState.AddModelError("", ex.Message);
                 return View(model);
             }
         }

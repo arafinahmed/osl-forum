@@ -96,6 +96,7 @@
     <Compile Include="Entities\Post.cs" />
     <Compile Include="Entities\Topic.cs" />
     <Compile Include="Enums\ApprovalType.cs" />
+    <Compile Include="Enums\TopicStatus.cs" />
     <Compile Include="Enums\Status.cs" />
     <Compile Include="Migrations\202203230909516_categorytable.cs" />
     <Compile Include="Migrations\202203230909516_categorytable.Designer.cs">
@@ -112,6 +113,10 @@
     <Compile Include="Migrations\202203310521511_FavForum.cs" />
     <Compile Include="Migrations\202203310521511_FavForum.Designer.cs">
       <DependentUpon>202203310521511_FavForum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204090655346_StatusInTopicTable.cs" />
+    <Compile Include="Migrations\202204090655346_StatusInTopicTable.Designer.cs">
+      <DependentUpon>202204090655346_StatusInTopicTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Profiles\CoreProfiles.cs" />
@@ -154,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202203310521511_FavForum.resx">
       <DependentUpon>202203310521511_FavForum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204090655346_StatusInTopicTable.resx">
+      <DependentUpon>202204090655346_StatusInTopicTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

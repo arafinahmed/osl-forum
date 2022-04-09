@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OSL.Forum.Core.Enums;
+using System;
 using System.Collections.Generic;
 using BO = OSL.Forum.Core.BusinessObjects;
 
@@ -11,6 +12,6 @@ namespace OSL.Forum.Core.Services
         BO.Topic Get(Guid topicId);
         void AutoApprovalOn(Guid topicId);
         void DeleteTopic(Guid topicId);
-        void CloseTopic(Guid topicId);
+        void ChangeTopicStatus(Guid topicId, TopicStatus status);
     }
 }

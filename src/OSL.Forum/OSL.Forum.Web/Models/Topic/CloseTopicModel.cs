@@ -48,12 +48,10 @@ namespace OSL.Forum.Web.Models.Topic
             if (topic.Status == TopicStatus.Closed.ToString())
                 throw new InvalidOperationException("Topic is already closed.");
 
-            topic.Status = TopicStatus.Open.ToString();
-
             var owner = _profileService.Owner(topic.ApplicationUserId);
             if (owner)
             {
-                _topicService.CloseTopic(id);
+                _topicService.ChangeTopicStatus(id, TopicStatus.Closed);
                 return topic.ForumId;
             }
             else
@@ -61,7 +59,7 @@ namespace OSL.Forum.Web.Models.Topic
                 var roles = await _profileService.UserRolesAsync();
                 if(roles.Contains(Roles.SuperAdmin.ToString()) || roles.Contains(Roles.SuperAdmin.ToString()) || roles.Contains(Roles.SuperAdmin.ToString()))
                 {
-                    _topicService.CloseTopic(id);
+                    _topicService.ChangeTopicStatus(id, TopicStatus.Closed);
                     return topic.ForumId;
                 }
             }

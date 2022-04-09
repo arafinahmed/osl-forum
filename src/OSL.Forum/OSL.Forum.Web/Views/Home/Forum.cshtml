@@ -93,12 +93,12 @@
             var id = $(this).data("id");
             var modal = $("#modal-default2");
             modal.find('.modal-body p').text('Are you sure you want to CLOSE this topic?')
-            var id = $("#deleteId").val(id);
-            $("#deleteForm").attr("action", "/Home/CloseTopic/" + id)
+            var id = $("#deleteId2").val(id);
+            $("#deleteForm2").attr("action", "/Home/CloseTopic/" + id)
             modal.modal('show');
         });
-        $("#deleteButton").click(function () {
-            $("#deleteForm").submit();
+        $("#deleteButton2").click(function () {
+            $("#deleteForm2").submit();
         });
     </script>
 }
@@ -114,14 +114,14 @@
             </div>
             <div class="modal-body">
                 <p>Are you sure, you want to delete?</p>
-                <form id="deleteForm" action="" method="post" asp-antiforgery="true">
+                <form id="deleteForm2" action="" method="post" asp-antiforgery="true">
                     @Html.AntiForgeryToken()
-                    <input type="hidden" id="deleteId" value="" name="id" />
+                    <input type="hidden" id="deleteId2" value="" name="id" />
                 </form>
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" id="deleteButton" class="btn btn-danger">Yes!</button>
+                <button type="button" id="deleteButton2" class="btn btn-danger">Yes!</button>
             </div>
         </div>
     </div>

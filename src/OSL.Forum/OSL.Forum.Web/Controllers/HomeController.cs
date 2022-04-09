@@ -204,8 +204,8 @@ namespace OSL.Forum.Web.Controllers
         {
             try
             {
-                var model = _scope.Resolve<DeleteTopicModel>();
-                var forumId = await model.DeleteTopic(id);
+                var model = _scope.Resolve<CloseTopicModel>();
+                var forumId = await model.CloseTopic(id);
                 return RedirectToAction("Forum", "Home", new { id = forumId });
             }
             catch

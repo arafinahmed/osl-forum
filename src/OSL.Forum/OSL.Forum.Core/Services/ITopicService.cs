@@ -11,5 +11,6 @@ namespace OSL.Forum.Core.Services
         BO.Topic Get(Guid topicId);
         void AutoApprovalOn(Guid topicId);
         void DeleteTopic(Guid topicId);
+        void CloseTopic(Guid topicId);
     }
 }

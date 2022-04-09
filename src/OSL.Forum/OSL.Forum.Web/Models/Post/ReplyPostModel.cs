@@ -100,6 +100,9 @@ namespace OSL.Forum.Web.Models.Post
             if (topic == null)
                 throw new Exception("No topic found");
 
+            if (topic.Status == TopicStatus.Closed.ToString())
+                throw new InvalidOperationException("The topic is already Closed.");
+
             if (topic.ApprovalType == ApprovalType.Auto.ToString())
                 status = Status.Approved.ToString();
 

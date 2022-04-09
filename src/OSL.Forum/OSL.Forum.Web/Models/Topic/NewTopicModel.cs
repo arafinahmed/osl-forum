@@ -96,7 +96,8 @@ namespace OSL.Forum.Web.Models.Topic
                 ModificationDate = time,
                 ApplicationUserId = user.Id,
                 ForumId = ForumId,
-                ApprovalType = ApprovalType.Manual.ToString()
+                ApprovalType = ApprovalType.Manual.ToString(),
+                Status = TopicStatus.Open.ToString()
             };
             var topicId = _topicService.Create(topic);
 

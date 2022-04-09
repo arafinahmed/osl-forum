@@ -19,7 +19,10 @@ namespace OSL.Forum.Core.Entities
         public Guid ForumId { get; set; }
         public virtual Forum Forum { get; set; }
         public string ApplicationUserId { get; set; }
+        [MaxLength(8)]
         public string ApprovalType { get; set; }
         public virtual IList<Post> Posts { get; set; }
+        [MaxLength(8)]
+        public string Status { get; set; }
     }
 }

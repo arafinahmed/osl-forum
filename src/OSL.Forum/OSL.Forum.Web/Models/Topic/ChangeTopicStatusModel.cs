@@ -45,8 +45,8 @@ namespace OSL.Forum.Web.Models.Topic
             if (topic == null)
                 throw new InvalidOperationException("No topic with the topic id");
 
-            if (topic.Status == TopicStatus.Closed.ToString())
-                throw new InvalidOperationException("Topic is already closed.");
+            if (topic.Status == status.ToString())
+                throw new InvalidOperationException("Topic is already "+ status.ToString());
 
             var owner = _profileService.Owner(topic.ApplicationUserId);
             if (owner)

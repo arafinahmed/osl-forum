@@ -104,7 +104,7 @@ namespace OSL.Forum.Core.Services
             _unitOfWork.Save();
         }
 
-        public void CloseTopic(Guid topicId)
+        public void ChangeTopicStatus(Guid topicId, TopicStatus status)
         {
             if (topicId == Guid.Empty)
                 throw new ArgumentNullException("No topic id is provided.");
@@ -114,7 +114,7 @@ namespace OSL.Forum.Core.Services
             if (topicEntity == null)
                 throw new InvalidOperationException("No topic found with the provided topic id.");
 
-            topicEntity.Status = TopicStatus.Closed.ToString();
+            topicEntity.Status = status.ToString();
             _unitOfWork.Save();
         }
     }

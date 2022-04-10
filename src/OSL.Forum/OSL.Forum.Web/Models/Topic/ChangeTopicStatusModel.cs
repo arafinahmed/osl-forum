@@ -12,17 +12,17 @@ using System.Web;
 
 namespace OSL.Forum.Web.Models.Topic
 {
-    public class CloseTopicModel
+    public class ChangeTopicStatusModel
     {
         private ITopicService _topicService;
         private ILifetimeScope _scope;
         private IProfileService _profileService;
 
-        public CloseTopicModel()
+        public ChangeTopicStatusModel()
         {
         }
 
-        public CloseTopicModel(ITopicService topicService, IProfileService profileService)
+        public ChangeTopicStatusModel(ITopicService topicService, IProfileService profileService)
         {
             _topicService = topicService;
             _profileService = profileService;
@@ -35,7 +35,7 @@ namespace OSL.Forum.Web.Models.Topic
             _profileService = _scope.Resolve<IProfileService>();
         }
 
-        public async Task<Guid> CloseTopic(Guid id)
+        public async Task<Guid> ChangeTopic(Guid id, TopicStatus status)
         {
             if (id == Guid.Empty)
                 throw new ArgumentNullException("No id is provided to delete topic.");
@@ -45,15 +45,13 @@ namespace OSL.Forum.Web.Models.Topic
             if (topic == null)
                 throw new InvalidOperationException("No topic with the topic id");
 
-            if (topic.Status == TopicStatus.Closed.ToString())
-                throw new InvalidOperationException("Topic is already closed.");
-
-            topic.Status = TopicStatus.Open.ToString();
+            if (topic.Status == status.ToString())
+                throw new InvalidOperationException("Topic is already "+ status.ToString());
 
             var owner = _profileService.Owner(topic.ApplicationUserId);
             if (owner)
             {
-                _topicService.CloseTopic(id);
+                _topicService.ChangeTopicStatus(id, status);
                 return topic.ForumId;
             }
             else
@@ -61,7 +59,7 @@ namespace OSL.Forum.Web.Models.Topic
                 var roles = await _profileService.UserRolesAsync();
                 if(roles.Contains(Roles.SuperAdmin.ToString()) || roles.Contains(Roles.SuperAdmin.ToString()) || roles.Contains(Roles.SuperAdmin.ToString()))
                 {
-                    _topicService.CloseTopic(id);
+                    _topicService.ChangeTopicStatus(id, status);
                     return topic.ForumId;
                 }
             }

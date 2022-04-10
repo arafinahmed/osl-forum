@@ -56,6 +56,14 @@
                                                 </svg>
                                             </a>
                                         }
+                                        else if (topic.Status == "Closed")
+                                        {
+                                            <a type="submit" class="m-lg-1 show-bs-modal3" data-id=@topic.Id value=@topic.Id>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-unlock" viewBox="0 0 16 16">
+                                                    <path d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2zM3 8a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1H3z" />
+                                                </svg>
+                                            </a>
+                                        }
 
                                         <a type="submit" class="m-lg-1 show-bs-modal" data-id=@topic.Id value=@topic.Id>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
@@ -101,6 +109,19 @@
             $("#deleteForm2").submit();
         });
     </script>
+    <script>
+        $('.show-bs-modal3').on('click', function (event) {
+            var id = $(this).data("id");
+            var modal = $("#modal-default3");
+            modal.find('.modal-body p').text('Are you sure you want to CLOSE this topic?')
+            var id = $("#deleteId3").val(id);
+            $("#deleteForm3").attr("action", "/Home/OpenTopic/" + id)
+            modal.modal('show');
+        });
+        $("#deleteButton3").click(function () {
+            $("#deleteForm3").submit();
+        });
+    </script>
 }
 
 <div class="modal fade" id="modal-default2">
@@ -122,6 +143,30 @@
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" id="deleteButton2" class="btn btn-danger">Yes!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-default3">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Open Topic</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure, you want to delete?</p>
+                <form id="deleteForm3" action="" method="post" asp-antiforgery="true">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="deleteId3" value="" name="id" />
+                </form>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="deleteButton3" class="btn btn-danger">Yes!</button>
             </div>
         </div>
     </div>

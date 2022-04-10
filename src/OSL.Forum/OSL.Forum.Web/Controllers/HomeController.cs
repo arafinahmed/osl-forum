@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using log4net;
+using OSL.Forum.Core.Enums;
 using OSL.Forum.Web.Models.Category;
 using OSL.Forum.Web.Models.FavoriteForum;
 using OSL.Forum.Web.Models.Forum;
@@ -204,8 +205,23 @@ namespace OSL.Forum.Web.Controllers
         {
             try
             {
-                var model = _scope.Resolve<CloseTopicModel>();
-                var forumId = await model.CloseTopic(id);
+                var model = _scope.Resolve<ChangeTopicStatusModel>();
+                var forumId = await model.ChangeTopic(id, TopicStatus.Closed);
+                return RedirectToAction("Forum", "Home", new { id = forumId });
+            }
+            catch
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        [Authorize, HttpPost, ValidateAntiForgeryToken]
+        public async Task<ActionResult> OpenTopic(Guid id)
+        {
+            try
+            {
+                var model = _scope.Resolve<ChangeTopicStatusModel>();
+                var forumId = await model.ChangeTopic(id, TopicStatus.Open);
                 return RedirectToAction("Forum", "Home", new { id = forumId });
             }
             catch
